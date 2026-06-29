@@ -1,0 +1,79 @@
+# Agent Configuration
+
+# Agent Weights (动态权重基础值)
+agent_weights:
+  fundamental: 0.25
+  technical: 0.35
+  sentiment: 0.20
+  macro: 0.20
+
+# Fundamental Analyst Agent
+fundamental_agent:
+  name: "基本面分析师"
+  description: "分析财报、估值、行业地位"
+  update_frequency: "weekly"
+  factors:
+    - "pe_ratio"
+    - "pb_ratio"
+    - "roe"
+    - "revenue_growth"
+    - "profit_growth"
+    - "debt_ratio"
+  scoring:
+    undervalued_threshold: 30   # PE低于此值加分
+    overvalued_threshold: 60    # PE高于此值减分
+    roe_excellent: 20           # ROE优秀线
+    roe_good: 15                # ROE良好线
+
+# Technical Analyst Agent
+technical_agent:
+  name: "技术面分析师"
+  description: "分析K线形态、指标信号"
+  update_frequency: "daily"
+  indicators:
+    - "ma_cross"        # 均线交叉
+    - "macd"            # MACD
+    - "rsi"             # RSI
+    - "kdj"             # KDJ
+    - "volume_ratio"    # 量比
+    - "bollinger"       # 布林带
+  scoring:
+    rsi_oversold: 30
+    rsi_overbought: 70
+    volume_surge: 2.0   # 量比超过2倍视为放量
+
+# Sentiment Analyst Agent
+sentiment_agent:
+  name: "情绪分析师"
+  description: "分析市场情绪、资金动向"
+  update_frequency: "daily"
+  sources:
+    - "eastmoney_news"    # 东财新闻
+    - "cls_telegraph"     # 财联社快讯
+    - "analyst_ratings"   # 分析师评级
+    - "fund_flow"         # 资金流向
+  scoring:
+    positive_threshold: 0.6
+    negative_threshold: 0.4
+
+# Macro Analyst Agent
+macro_agent:
+  name: "宏观分析师"
+  description: "分析宏观经济、政策影响"
+  update_frequency: "weekly"
+  indicators:
+    - "gdp_growth"
+    - "cpi"
+    - "pmi"
+    - "interest_rate"
+    - "money_supply"     # M2
+    - "social_financing"  # 社融
+
+# Decision Coordinator Agent
+coordinator:
+  name: "决策协调员"
+  description: "综合各分析师意见，做出最终决策"
+  min_consensus_agents: 3       # 最少需要几个Agent同意
+  confidence_threshold: 0.6     # 信心阈值
+  max_daily_trades: 3           # 每日最大交易次数
+  rebalance_day: "friday"       # 每周再平衡日

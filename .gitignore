@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+*.egg-info/
+data/
+backups/
+*.zip
+.env
+SERVER_ACCESS.md
+node_modules/
+.next/
+coverage/

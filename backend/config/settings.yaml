@@ -1,0 +1,77 @@
+data_sources:
+  akshare:
+    enabled: true
+    retry_delay: 1
+    retry_times: 3
+  mootdx:
+    enabled: true
+    servers:
+    - 119.147.212.81
+    - 112.74.214.43
+    timeout: 10
+  tencent:
+    base_url: http://qt.gtimg.cn
+    enabled: true
+database:
+  sqlite:
+    path: ./data/quant_agent.db
+  type: sqlite
+llm:
+  api_key: sk-10f26afe31984c0ab7442c81d1a0e8f2
+  base_url: https://api.deepseek.com
+  cache:
+    enabled: true
+    max_size: 1000
+    ttl: 3600
+  max_tokens: 2000
+  model: deepseek-chat
+  provider: deepseek
+  temperature: 0.7
+notification:
+  pushplus:
+    enabled: true
+    token: "5616652efe2f49cfadd838f5f76a0379"
+  webhook:
+    enabled: false
+    url: ''
+scheduler:
+  agent_analyze: 0 18 * * 1-5
+  data_collect: 0 16 * * 1-5
+  signal_generate: 0 19 * * 1-5
+stocks_pool:
+- '600343'
+- '000547'
+- '603636'
+- '605186'
+- '000712'
+- '600198'
+- '002031'
+system:
+  language: zh-CN
+  log_level: INFO
+  name: QuantAgent
+  timezone: Asia/Shanghai
+  version: 2.0.0
+trading:
+  approval_mode: true
+  market: A_share
+  max_position_pct: 0.3
+  stop_loss_pct: 0.05
+  take_profit_pct: 0.15
+
+# 自动交易配置
+autotrader:
+  initial_capital: 10000
+  interval: 1800  # 扫描间隔(秒) 1800=30分钟
+  scan_count: 200
+  top_n: 10
+  factor_weights:
+    alpha_return_20d: 0.4
+    alpha_volume_ratio_5d: 0.3
+    alpha_price_ma_ratio_20: 0.3
+  risk:
+    stop_loss: 0.05
+    take_profit: 0.10
+    max_daily_trades: 20
+    min_price: 3
+    max_price: 200
