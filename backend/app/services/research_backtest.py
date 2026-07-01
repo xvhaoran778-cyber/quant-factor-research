@@ -317,6 +317,16 @@ def _compute_weekly_feature_panel(store: ParquetMarketStore, start: date, end: d
         frame = frame[(frame["date"].dt.date >= read_start) & (frame["date"].dt.date <= end)].sort_values("date")
         if len(frame) < 65:
             continue
+
+        # 修复: suspended 列在原始数据中永远为 False
+        # 实际停牌表现为 volume=0 或所有 OHLC 价格相等（平线）
+        is_susp = (frame["volume"] == 0) | (
+            (frame["open"] == frame["close"])
+            & (frame["high"] == frame["low"])
+            & (frame["open"] == frame["high"])
+        )
+        frame["suspended"] = is_susp.values
+
         close = frame.get("adj_close", frame["close"]).astype(float)
         returns = close.pct_change()
         frame["ret1"] = close.pct_change()
@@ -343,12 +353,19 @@ def _compute_weekly_feature_panel(store: ParquetMarketStore, start: date, end: d
         frame["high60_pos"] = close / high60.replace(0, np.nan)
         frame["next_date"] = frame["date"].shift(-1)
         frame["next_open"] = frame["open"].shift(-1)
+
+        # 如果下一根 bar 是停牌，当前 bar 的 next_open/next_date 标记为无效
+        _next_susp = is_susp.shift(-1)
+        _next_susp.iloc[-1] = True  # 最后一根 bar 没有下一根 → 视为停牌
+        frame.loc[_next_susp, "next_open"] = np.nan
+        frame.loc[_next_susp, "next_date"] = pd.NaT
+
         frame["week"] = frame["date"].dt.to_period("W-FRI").astype(str)
         weekly = frame.groupby("week", as_index=False).tail(1).copy()
         weekly = weekly[(weekly["date"].dt.date >= start) & weekly["next_open"].notna() & ~weekly["suspended"]]
         weekly["name"] = weekly["symbol"].map(names).fillna(weekly["symbol"])
         weekly["industry"] = weekly["symbol"].map(industries).fillna("未知")
-        frames.append(weekly[["week", "date", "next_date", "symbol", "name", "industry", "close", "next_open", "ret1", "ret5", "ret10", "ret20", "ret60", "vol20", "downside_vol20", "trend60", "ma5_gap", "ma20_gap", "boll_z", "rsi14", "volume_ratio", "liquidity", "range60", "high60_pos", "listed_days"]])
+        frames.append(weekly[["week", "date", "next_date", "symbol", "name", "industry", "close", "next_open", "ret1", "ret5", "ret10", "ret20", "ret60", "vol20", "downside_vol20", "trend60", "ma5_gap", "ma20_gap", "boll_z", "rsi14", "volume_ratio", "liquidity", "range60", "high60_pos", "listed_days", "suspended"]])
     panel = pd.concat(frames, ignore_index=True) if frames else pd.DataFrame()
     if panel.empty:
         return panel

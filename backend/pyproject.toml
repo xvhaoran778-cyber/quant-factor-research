@@ -15,6 +15,7 @@ dependencies = [
     "akshare>=1.16",
     "baostock>=0.8.9",
     "loguru>=0.7",
+    "rich>=13,<14",
 ]
 
 [project.optional-dependencies]
