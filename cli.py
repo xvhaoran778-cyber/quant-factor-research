@@ -261,6 +261,194 @@ def cmd_compare():
     console.print(yt)
 
 
+def cmd_compare_agent(args):
+    """V8 vs V8+Agent 交割单对比"""
+    from app.services.market_store import ParquetMarketStore
+    from app.services.research_backtest import build_weekly_feature_panel, run_scored_backtest
+    from app.services.strategies.v8_canonical import v8_scorer, v8_candidate_filter, merge_alpha_132
+    from app.services.strategies.agent_gate import agent_gate, AGENT_RULES, get_agent_rejection_log
+
+    year = args.year or 2024
+    start, end = date(year, 1, 1), date(year, 12, 31)
+    console.print(f"[bold]V8 vs V8+Agent 对比回测[/] [dim]{start} → {end}[/]")
+    console.print(f"使用 4 个确定性 Agent: {', '.join(r['name'] for r in AGENT_RULES.values())}")
+    console.print()
+
+    store = ParquetMarketStore(MARKET_DIR)
+
+    with Progress(
+        TextColumn("[progress.description]{task.description}"),
+        BarColumn(),
+        TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
+        TimeElapsedColumn(),
+        console=console,
+    ) as progress:
+        task = progress.add_task("构建面板...", total=100)
+        panel = build_weekly_feature_panel(store, start, end)
+        panel = merge_alpha_132(panel)
+        progress.update(task, advance=20, description="数据准备完成")
+
+        progress.update(task, advance=20, description="运行 V8（无 Agent）...")
+        r1 = run_scored_backtest(
+            panel, v8_scorer, top_n=5, initial_cash=100_000,
+            market_filter=True, retention_multiple=3, universe_size=1000,
+            candidate_filter=v8_candidate_filter,
+        )
+        progress.update(task, advance=30)
+
+        progress.update(task, advance=0, description="运行 V8+Agent 门控...")
+
+        def v8_with_agents(group):
+            return agent_gate(v8_candidate_filter(group))
+
+        r2 = run_scored_backtest(
+            panel, v8_scorer, top_n=5, initial_cash=100_000,
+            market_filter=True, retention_multiple=3, universe_size=1000,
+            candidate_filter=v8_with_agents,
+        )
+        progress.update(task, advance=30, description="完成")
+
+    # 1. 对比表
+    m1, m2 = r1["metrics"], r2["metrics"]
+    table = Table(title=f"核心指标对比 ({year})", box=box.ROUNDED, show_header=True)
+    table.add_column("指标", style="cyan")
+    table.add_column("V8 (无 Agent)", justify="right")
+    table.add_column("V8 + Agent", justify="right")
+    table.add_column("差异", justify="right")
+
+    def diff(a, b, fmt=lambda x: f"{x:.4f}"):
+        a_str, b_str = fmt(a), fmt(b)
+        d = a - b
+        d_str = f"{d:+.4f}" if abs(d) > 1e-9 else "0"
+        return a_str, b_str, d_str
+
+    for label, k1, k2, fmt in [
+        ("总收益", "total_return", "total_return", lambda x: f"{x*100:+.2f}%"),
+        ("夏普", "sharpe", "sharpe", lambda x: f"{x:.4f}"),
+        ("最大回撤", "max_drawdown", "max_drawdown", lambda x: f"{x*100:+.2f}%"),
+        ("年化波动", "volatility", "volatility", lambda x: f"{x*100:+.2f}%"),
+        ("胜率", "win_rate", "win_rate", lambda x: f"{x*100:.1f}%"),
+    ]:
+        a_str, b_str, d_str = diff(m1.get(k1, 0) or 0, m2.get(k2, 0) or 0, fmt)
+        table.add_row(label, a_str, b_str, d_str)
+
+    n1 = len([t for t in r1["trades"] if t["side"] == "sell"])
+    n2 = len([t for t in r2["trades"] if t["side"] == "sell"])
+    table.add_row("交易次数", str(n1), str(n2), f"{n1 - n2:+d}")
+    console.print(table)
+
+    # 2. Agent 拒绝统计
+    console.print()
+    console.print("[bold]Agent 拒绝统计[/]")
+    rej_log = get_agent_rejection_log(panel)
+    if not rej_log.empty:
+        stats = rej_log.groupby("agent_name")["rejected_count"].sum().sort_values(ascending=False)
+        rt = Table(box=box.SIMPLE, show_header=True)
+        rt.add_column("Agent", style="cyan")
+        rt.add_column("拒绝次数", justify="right")
+        rt.add_column("规则", style="dim")
+        for name, cnt in stats.items():
+            rule = next((r["threshold"] for r in AGENT_RULES.values() if r["name"] == name), "?")
+            rt.add_row(name, f"{cnt:,}", rule)
+        console.print(rt)
+    else:
+        console.print("[yellow]无 Agent 拒绝记录[/]")
+
+    # 3. 交割单差异
+    console.print()
+    console.print("[bold]交割单差异分析[/]")
+    t1 = {(t["date"], t["symbol"]): t for t in r1["trades"]}
+    t2 = {(t["date"], t["symbol"]): t for t in r2["trades"]}
+    only_v8 = set(t1) - set(t2)
+    only_agent = set(t2) - set(t1)
+    common = set(t1) & set(t2)
+
+    dt = Table(box=box.SIMPLE, show_header=True)
+    dt.add_column("类别", style="cyan")
+    dt.add_column("数量", justify="right")
+    dt.add_row("V8 独有交易（被 Agent 否决）", str(len(only_v8)))
+    dt.add_row("V8+Agent 独有交易", str(len(only_agent)))
+    dt.add_row("共同交易", str(len(common)))
+    console.print(dt)
+
+    # 4. 关键差异交易：被 Agent 否决的
+    if only_v8:
+        console.print()
+        console.print(f"[bold]Agent 否决的 V8 原始交易（最多 10 条）[/]")
+        kt = Table(box=box.SIMPLE, show_header=True)
+        kt.add_column("日期", style="dim")
+        kt.add_column("代码", style="cyan")
+        kt.add_column("名称")
+        kt.add_column("方向")
+        kt.add_column("价格", style="green")
+        kt.add_column("数量", justify="right")
+        for k in list(only_v8)[:10]:
+            t = t1[k]
+            kt.add_row(t["date"], t["symbol"], t.get("name", ""), t["side"], f"{t['price']:.2f}", str(t["quantity"]))
+        console.print(kt)
+
+    # 5. 保存完整交割单到 reports
+    reports_dir = Path(__file__).resolve().parent / "reports"
+    reports_dir.mkdir(exist_ok=True)
+
+    summary_path = reports_dir / f"agent_comparison_{year}.md"
+    summary_path.write_text(_make_comparison_report(year, r1, r2, rej_log, only_v8, t1, t2), encoding="utf-8")
+    console.print(f"\n[green]对比报告已保存: {summary_path}[/]")
+
+
+def _make_comparison_report(year, r1, r2, rej_log, only_v8, t1, t2):
+    m1, m2 = r1["metrics"], r2["metrics"]
+    lines = [
+        f"# V8 vs V8+Agent 对比报告 — {year}",
+        "",
+        f"## 测试目的",
+        f"验证 Agent 过滤层是否对 V8 策略有正向贡献。",
+        f"4 个 Agent 各自有独立否决规则（确定性，非 mock）:",
+    ]
+    from app.services.strategies.agent_gate import AGENT_RULES
+    for aid, rule in AGENT_RULES.items():
+        lines.append(f"- **{rule['name']}**: {rule['threshold']}（{rule['reason']}）")
+    lines += [
+        "",
+        f"## 核心指标对比",
+        f"| 指标 | V8 (无 Agent) | V8 + Agent | 差异 |",
+        f"|------|---------------|------------|------|",
+        f"| 总收益 | {m1['total_return']*100:+.2f}% | {m2['total_return']*100:+.2f}% | {(m1['total_return']-m2['total_return'])*100:+.2f}pp |",
+        f"| 夏普比率 | {m1['sharpe']:.4f} | {m2['sharpe']:.4f} | {m1['sharpe']-m2['sharpe']:+.4f} |",
+        f"| 最大回撤 | {m1['max_drawdown']*100:+.2f}% | {m2['max_drawdown']*100:+.2f}% | {(m1['max_drawdown']-m2['max_drawdown'])*100:+.2f}pp |",
+        f"| 年化波动 | {m1['volatility']*100:+.2f}% | {m2['volatility']*100:+.2f}% | {(m1['volatility']-m2['volatility'])*100:+.2f}pp |",
+        "",
+        f"## 交易统计",
+        f"- V8 独有交易（被 Agent 否决）: **{len(only_v8)}** 笔",
+        f"- V8+Agent 独有交易: {len(set(t2) - set(t1))} 笔",
+        f"- 共同交易: {len(set(t1) & set(t2))} 笔",
+        "",
+    ]
+    if not rej_log.empty:
+        lines += ["## Agent 拒绝统计", ""]
+        stats = rej_log.groupby("agent_name")["rejected_count"].sum().sort_values(ascending=False)
+        for name, cnt in stats.items():
+            lines.append(f"- {name}: {cnt:,} 次否决")
+        lines.append("")
+
+    if only_v8:
+        lines += ["## 被 Agent 否决的关键交易（前 20 条）", "",
+                  "| 日期 | 代码 | 名称 | 方向 | 价格 | 数量 | PnL |",
+                  "|------|------|------|------|------|------|-----|"]
+        for k in list(only_v8)[:20]:
+            t = t1[k]
+            pnl = f"{t.get('pnl', 0):.0f}" if t.get('pnl') is not None else "-"
+            lines.append(f"| {t['date']} | {t['symbol']} | {t.get('name','')} | {t['side']} | {t['price']:.2f} | {t['quantity']} | {pnl} |")
+        lines.append("")
+
+    lines += [
+        "## 结论",
+        "",
+        f"Agent 过滤层 **{'显著改善' if m2['total_return'] > m1['total_return'] and m2['sharpe'] > m1['sharpe'] else '影响有限'}** 策略表现。",
+    ]
+    return "\n".join(lines)
+
+
 def cmd_agent(args):
     """Agent 决策模拟"""
     code = args.code.upper()
@@ -413,6 +601,9 @@ def main():
 
     sub.add_parser("compare", help="策略对比")
 
+    cmp_agent = sub.add_parser("compare-agent", help="V8 vs V8+Agent 交割单对比")
+    cmp_agent.add_argument("--year", type=int, default=2024, help="对比年份 (默认 2024)")
+
     agent = sub.add_parser("agent", help="Agent 决策模拟")
     agent.add_argument("code", help="股票代码，如 600519.SH")
 
@@ -426,6 +617,8 @@ def main():
         cmd_run(args)
     elif args.command == "compare":
         cmd_compare()
+    elif args.command == "compare-agent":
+        cmd_compare_agent(args)
     elif args.command == "agent":
         cmd_agent(args)
     elif args.command == "presets":

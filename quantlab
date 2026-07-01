@@ -48,14 +48,15 @@ show_menu() {
     echo "  [6] 输入股票代码进行 Agent 分析"
     echo "  [7] 列出所有策略 (presets)"
     echo "  [8] 生成面试报告 (report)"
-    echo "  [9] 查看帮助"
+    echo "  [9] ⭐ V8 vs V8+Agent 交割单对比 (compare-agent)"
+    echo "  [a] 查看帮助"
     echo "  [0] 退出"
     echo ""
 }
 
 while true; do
     show_menu
-    echo -n "请输入数字 [0-9]: "
+    echo -n "请输入数字 [0-9, a]: "
     read choice
     echo ""
 
@@ -95,6 +96,13 @@ while true; do
             PYTHONPATH=backend "$VENV_PYTHON" "$CLI" report
             ;;
         9)
+            echo -n "请输入对比年份 (默认 2024): "
+            read cmp_year
+            if [ -z "$cmp_year" ]; then cmp_year=2024; fi
+            cd "$PROJECT_DIR"
+            PYTHONPATH=backend "$VENV_PYTHON" "$CLI" compare-agent --year "$cmp_year"
+            ;;
+        a)
             cd "$PROJECT_DIR"
             PYTHONPATH=backend "$VENV_PYTHON" "$CLI" --help
             ;;
@@ -103,7 +111,7 @@ while true; do
             exit 0
             ;;
         *)
-            echo "❌ 无效输入，请输入 0-9 之间的数字"
+            echo "❌ 无效输入，请输入 0-9 或 a"
             ;;
     esac
 
