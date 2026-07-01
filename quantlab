@@ -1,0 +1,114 @@
+#!/bin/zsh
+# QuantLab 一键启动脚本（适合非技术用户）
+export TERM=${TERM:-xterm-256color}
+# 用法:
+#   ./quantlab              # 显示交互菜单
+#   ./quantlab info         # 直接运行命令
+#   ./quantlab run v8 --quick
+
+PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
+VENV_PYTHON="$PROJECT_DIR/backend/.venv/bin/python"
+CLI="$PROJECT_DIR/cli.py"
+
+# 检查环境
+if [ ! -f "$VENV_PYTHON" ]; then
+    echo "❌ 未找到 Python 虚拟环境: $VENV_PYTHON"
+    echo "请先安装依赖: cd backend && python3 -m venv .venv && .venv/bin/pip install -e ."
+    exit 1
+fi
+
+if [ ! -f "$CLI" ]; then
+    echo "❌ 未找到 CLI 文件: $CLI"
+    exit 1
+fi
+
+# 如果有参数，直接透传给 cli.py
+if [ $# -gt 0 ]; then
+    cd "$PROJECT_DIR"
+    PYTHONPATH=backend "$VENV_PYTHON" "$CLI" "$@"
+    exit 0
+fi
+
+# 无参数：显示交互式菜单
+clear
+echo ""
+echo "╔════════════════════════════════════════════════════════════╗"
+echo "║                                                            ║"
+echo "║              QuantLab 量化投研系统 演示菜单                ║"
+echo "║                                                            ║"
+echo "╚════════════════════════════════════════════════════════════╝"
+echo ""
+
+show_menu() {
+    echo "  [1] 项目概览 (info)"
+    echo "  [2] V8 快速回测 — 近1年 (约1.5分钟)"
+    echo "  [3] V8 完整回测 — 2012-2026 (约5-10分钟)"
+    echo "  [4] 策略对比 (compare)"
+    echo "  [5] Agent 决策演示 — 贵州茅台 (agent 600519.SH)"
+    echo "  [6] 输入股票代码进行 Agent 分析"
+    echo "  [7] 列出所有策略 (presets)"
+    echo "  [8] 生成面试报告 (report)"
+    echo "  [9] 查看帮助"
+    echo "  [0] 退出"
+    echo ""
+}
+
+while true; do
+    show_menu
+    echo -n "请输入数字 [0-9]: "
+    read choice
+    echo ""
+
+    case $choice in
+        1)
+            cd "$PROJECT_DIR"
+            PYTHONPATH=backend "$VENV_PYTHON" "$CLI" info
+            ;;
+        2)
+            cd "$PROJECT_DIR"
+            PYTHONPATH=backend "$VENV_PYTHON" "$CLI" run v8 --quick
+            ;;
+        3)
+            cd "$PROJECT_DIR"
+            PYTHONPATH=backend "$VENV_PYTHON" "$CLI" run v8
+            ;;
+        4)
+            cd "$PROJECT_DIR"
+            PYTHONPATH=backend "$VENV_PYTHON" "$CLI" compare
+            ;;
+        5)
+            cd "$PROJECT_DIR"
+            PYTHONPATH=backend "$VENV_PYTHON" "$CLI" agent 600519.SH
+            ;;
+        6)
+            echo -n "请输入股票代码 (如 600519.SH 或 000001.SZ): "
+            read code
+            cd "$PROJECT_DIR"
+            PYTHONPATH=backend "$VENV_PYTHON" "$CLI" agent "$code"
+            ;;
+        7)
+            cd "$PROJECT_DIR"
+            PYTHONPATH=backend "$VENV_PYTHON" "$CLI" presets
+            ;;
+        8)
+            cd "$PROJECT_DIR"
+            PYTHONPATH=backend "$VENV_PYTHON" "$CLI" report
+            ;;
+        9)
+            cd "$PROJECT_DIR"
+            PYTHONPATH=backend "$VENV_PYTHON" "$CLI" --help
+            ;;
+        0)
+            echo "再见 👋"
+            exit 0
+            ;;
+        *)
+            echo "❌ 无效输入，请输入 0-9 之间的数字"
+            ;;
+    esac
+
+    echo ""
+    echo -n "按回车键返回菜单..."
+    read
+    clear
+done
