@@ -1,0 +1,346 @@
+"""
+优化版因子计算 - 使用向量化操作大幅提升速度
+"""
+
+import numpy as np
+import pandas as pd
+from typing import Dict, List, Optional
+import warnings
+warnings.filterwarnings('ignore')
+
+
+def compute_factors_vectorized(data: Dict[str, pd.DataFrame], 
+                               factor_names: Optional[List[str]] = None,
+                               max_stocks: int = 1000) -> pd.DataFrame:
+    """
+    向量化计算因子（优化版）
+    
+    优化点：
+    1. 使用 DataFrame 的 rolling 方法批量计算，避免逐股票循环
+    2. 限制股票数量（默认前 1000 只流动性最好的）
+    3. 一次性计算所有日期的因子
+    
+    Args:
+        data: 数据字典
+        factor_names: 因子名称列表
+        max_stocks: 最大股票数量（按流动性排序）
+    
+    Returns:
+        因子值 DataFrame，索引为 (date, symbol) 的 MultiIndex
+    """
+    if factor_names is None:
+        factor_names = list(FACTOR_REGISTRY_VECTORIZED.keys())
+    
+    # 获取数据
+    close_prices = data['close']
+    returns = data['returns']
+    volume = data['volume']
+    high = data['high']
+    low = data['low']
+    open_price = data['open']
+    
+    # 按流动性筛选股票（取成交额最大的前 max_stocks 只）
+    if 'amount' in data:
+        avg_amount = data['amount'].mean()
+        top_stocks = avg_amount.nlargest(max_stocks).index
+    else:
+        # 如果没有成交额数据，按成交量排序
+        avg_volume = volume.mean()
+        top_stocks = avg_volume.nlargest(max_stocks).index
+    
+    # 筛选股票
+    close_prices = close_prices[top_stocks]
+    returns = returns[top_stocks]
+    volume = volume[top_stocks]
+    high = high[top_stocks]
+    low = low[top_stocks]
+    open_price = open_price[top_stocks]
+    
+    dates = close_prices.index
+    symbols = close_prices.columns
+    
+    print(f"开始计算 {len(factor_names)} 个因子，共 {len(symbols)} 只股票（按流动性筛选）")
+    
+    # 创建 MultiIndex
+    index = pd.MultiIndex.from_product([dates, symbols], names=['date', 'symbol'])
+    results = pd.DataFrame(index=index, columns=factor_names, dtype=float)
+    
+    # 逐因子计算（向量化）
+    for factor_name in factor_names:
+        if factor_name not in FACTOR_REGISTRY_VECTORIZED:
+            continue
+        
+        print(f"  计算因子: {factor_name}")
+        
+        try:
+            factor_func = FACTOR_REGISTRY_VECTORIZED[factor_name]['func']
+            factor_values = factor_func(close_prices, returns, volume, high, low, open_price)
+            
+            # 将 DataFrame 转换为 MultiIndex Series
+            factor_series = factor_values.stack()
+            factor_series.index.names = ['date', 'symbol']
+            
+            # 填充结果
+            results[factor_name] = factor_series
+            
+        except Exception as e:
+            print(f"    警告: {factor_name} 计算失败 - {e}")
+    
+    print(f"因子计算完成")
+    return results
+
+
+# ============================================================================
+# 向量化因子函数
+# ============================================================================
+
+def calc_return_skewness_vectorized(close_prices, returns, volume, high, low, open_price, window=60):
+    """收益偏度 - 向量化版本"""
+    return returns.rolling(window).skew()
+
+
+def calc_return_kurtosis_vectorized(close_prices, returns, volume, high, low, open_price, window=60):
+    """收益峰度 - 向量化版本"""
+    return returns.rolling(window).kurt()
+
+
+def calc_bid_ask_spread_vectorized(close_prices, returns, volume, high, low, open_price):
+    """买卖价差代理 - 向量化版本"""
+    return (high - low) / close_prices
+
+
+def calc_liquidity_shock_vectorized(close_prices, returns, volume, high, low, open_price, window=20):
+    """流动性冲击 - 向量化版本"""
+    volume_ma = volume.rolling(window).mean()
+    volume_std = volume.rolling(window).std()
+    shock = (volume - volume_ma) / volume_std.replace(0, np.nan)
+    return shock
+
+
+def calc_price_impact_vectorized(close_prices, returns, volume, high, low, open_price, window=20):
+    """价格冲击 - 向量化版本"""
+    volume_std = volume.rolling(window).std()
+    impact = returns / volume_std.replace(0, np.nan)
+    return impact
+
+
+def calc_momentum_acceleration_vectorized(close_prices, returns, volume, high, low, open_price, window=20):
+    """动量加速度 - 向量化版本"""
+    momentum = close_prices.pct_change(window)
+    acceleration = momentum.diff(window)
+    return acceleration
+
+
+def calc_disposition_effect_vectorized(close_prices, returns, volume, high, low, open_price):
+    """处置效应 - 向量化版本"""
+    high_250d = close_prices.rolling(250).max()
+    return (close_prices - high_250d) / high_250d
+
+
+def calc_order_flow_imbalance_vectorized(close_prices, returns, volume, high, low, open_price):
+    """订单流不平衡 - 向量化版本"""
+    prev_close = close_prices.shift(1)
+    gap = open_price - prev_close
+    direction = np.sign(gap)
+    magnitude = abs(gap) / prev_close
+    return direction * magnitude
+
+
+def calc_alpha_momentum_vectorized(close_prices, returns, volume, high, low, open_price, window=60):
+    """Alpha 动量 - 向量化版本（简化版）"""
+    # 计算市场收益率
+    market_returns = returns.mean(axis=1)
+    
+    # 计算 beta（简化：使用相关性）
+    # 注意：这是一个近似，完整的 CAPM beta 需要更复杂的计算
+    alpha = returns - market_returns
+    return alpha.rolling(window).sum()
+
+
+def calc_correlation_breakdown_vectorized(close_prices, returns, volume, high, low, open_price, window=20):
+    """相关性突变 - 向量化版本"""
+    market_returns = returns.mean(axis=1)
+    
+    # 计算滚动相关性
+    corr_recent = returns.rolling(window).corr(market_returns)
+    corr_long = returns.rolling(window * 3).corr(market_returns)
+    
+    return corr_recent - corr_long
+
+
+def calc_hurst_exponent_vectorized(close_prices, returns, volume, high, low, open_price, max_lag=20):
+    """Hurst 指数 - 向量化版本（简化版）"""
+    # 使用 R/S 分析的简化版本
+    # 这里使用一个近似方法：计算不同时间尺度的波动率比值
+    
+    # 计算对数收益率
+    log_returns = np.log(close_prices / close_prices.shift(1))
+    
+    # 计算不同时间尺度的标准差
+    std_short = log_returns.rolling(5).std()
+    std_long = log_returns.rolling(20).std()
+    
+    # Hurst 指数近似
+    hurst = np.log(std_long / std_short.replace(0, np.nan)) / np.log(4)
+    
+    return hurst
+
+
+def calc_rank_velocity_vectorized(close_prices, returns, volume, high, low, open_price, window=20):
+    """排名变化速度 - 向量化版本"""
+    # 横截面排名
+    ranks = close_prices.rank(axis=1, pct=True)
+    # 排名变化速度
+    velocity = ranks.diff(window) / window
+    return velocity
+
+
+def calc_industry_relative_strength_vectorized(close_prices, returns, volume, high, low, open_price, window=20):
+    """行业相对强度 - 向量化版本（简化版）"""
+    # 将所有股票分为3个行业（简单分组）
+    n_stocks = len(returns.columns)
+    industry_size = n_stocks // 3
+    
+    # 计算每个行业的平均收益
+    industry_1 = returns.iloc[:, :industry_size].mean(axis=1)
+    industry_2 = returns.iloc[:, industry_size:2*industry_size].mean(axis=1)
+    industry_3 = returns.iloc[:, 2*industry_size:].mean(axis=1)
+    
+    # 为每个股票分配行业收益
+    industry_returns = pd.DataFrame(index=returns.index, columns=returns.columns)
+    industry_returns.iloc[:, :industry_size] = industry_1.values[:, None]
+    industry_returns.iloc[:, industry_size:2*industry_size] = industry_2.values[:, None]
+    industry_returns.iloc[:, 2*industry_size:] = industry_3.values[:, None]
+    
+    # 计算相对强度
+    stock_cumret = returns.rolling(window).sum()
+    ind_cumret = industry_returns.rolling(window).sum()
+    
+    return stock_cumret - ind_cumret
+
+
+def calc_overreaction_reversal_vectorized(close_prices, returns, volume, high, low, open_price, window=20, threshold=2):
+    """过度反应反转 - 向量化版本"""
+    cumulative_returns = returns.rolling(window).sum()
+    returns_std = returns.rolling(window * 3).std()
+    
+    is_extreme = cumulative_returns.abs() > returns_std * threshold
+    
+    reversal = -returns.rolling(window).sum().shift(window)
+    
+    # 只在极端情况下返回反转信号
+    return reversal.where(is_extreme, 0)
+
+
+def calc_herding_indicator_vectorized(close_prices, returns, volume, high, low, open_price, window=20):
+    """羊群效应 - 向量化版本（简化版）"""
+    market_returns = returns.mean(axis=1)
+    market_std = market_returns.rolling(window).std()
+    
+    # 识别极端市场日
+    extreme_days = market_returns.abs() > market_std * 2
+    
+    # 计算极端日和正常日的相关性
+    # 注意：这是一个近似，完整的计算需要更复杂的逻辑
+    corr_extreme = returns.where(extreme_days).rolling(window).corr(market_returns.where(extreme_days))
+    corr_normal = returns.where(~extreme_days).rolling(window).corr(market_returns.where(~extreme_days))
+    
+    return corr_extreme - corr_normal
+
+
+# ============================================================================
+# 向量化因子注册表
+# ============================================================================
+
+FACTOR_REGISTRY_VECTORIZED = {
+    'return_skewness': {
+        'func': calc_return_skewness_vectorized,
+        'category': '统计分布',
+        'description': '收益分布的不对称性',
+        'direction': 'positive',
+    },
+    'return_kurtosis': {
+        'func': calc_return_kurtosis_vectorized,
+        'category': '统计分布',
+        'description': '收益分布的尾部厚度',
+        'direction': 'negative',
+    },
+    'bid_ask_spread': {
+        'func': calc_bid_ask_spread_vectorized,
+        'category': '市场微观结构',
+        'description': '用日内振幅代理买卖价差',
+        'direction': 'negative',
+    },
+    'liquidity_shock': {
+        'func': calc_liquidity_shock_vectorized,
+        'category': '市场微观结构',
+        'description': '成交量突然放大',
+        'direction': 'positive',
+    },
+    'price_impact': {
+        'func': calc_price_impact_vectorized,
+        'category': '市场微观结构',
+        'description': '单位成交量的价格变化',
+        'direction': 'negative',
+    },
+    'momentum_acceleration': {
+        'func': calc_momentum_acceleration_vectorized,
+        'category': '横截面关系',
+        'description': '动量的变化速度（二阶导数）',
+        'direction': 'positive',
+    },
+    'disposition_effect': {
+        'func': calc_disposition_effect_vectorized,
+        'category': '行为金融',
+        'description': '距离 250 日高点的距离',
+        'direction': 'negative',
+    },
+    'order_flow_imbalance': {
+        'func': calc_order_flow_imbalance_vectorized,
+        'category': '市场微观结构',
+        'description': '开盘跳空方向 × 幅度',
+        'direction': 'positive',
+    },
+    'alpha_momentum': {
+        'func': calc_alpha_momentum_vectorized,
+        'category': '横截面关系',
+        'description': 'CAPM 残差的动量（去除市场影响）',
+        'direction': 'positive',
+    },
+    'correlation_breakdown': {
+        'func': calc_correlation_breakdown_vectorized,
+        'category': '横截面关系',
+        'description': '与市场相关性突然下降',
+        'direction': 'positive',
+    },
+    'hurst_exponent': {
+        'func': calc_hurst_exponent_vectorized,
+        'category': '统计分布',
+        'description': '衡量时间序列的长记忆性',
+        'direction': 'positive',
+    },
+    'rank_velocity': {
+        'func': calc_rank_velocity_vectorized,
+        'category': '横截面关系',
+        'description': '股票在全市场的排名变化速度',
+        'direction': 'positive',
+    },
+    'industry_relative_strength': {
+        'func': calc_industry_relative_strength_vectorized,
+        'category': '横截面关系',
+        'description': '相对行业的超额收益',
+        'direction': 'positive',
+    },
+    'overreaction_reversal': {
+        'func': calc_overreaction_reversal_vectorized,
+        'category': '行为金融',
+        'description': '极端收益后的反转',
+        'direction': 'positive',
+    },
+    'herding_indicator': {
+        'func': calc_herding_indicator_vectorized,
+        'category': '行为金融',
+        'description': '极端市场日的相关性',
+        'direction': 'negative',
+    },
+}
