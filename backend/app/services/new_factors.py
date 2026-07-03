@@ -305,7 +305,15 @@ def return_skewness(returns: pd.Series, window: int = 60) -> float:
     Returns:
         偏度值
     """
-    return returns.rolling(window).skew().iloc[-1]
+    # 检查数据是否足够
+    if len(returns.dropna()) < window:
+        return np.nan
+    
+    skew_series = returns.rolling(window).skew()
+    if skew_series.empty or skew_series.dropna().empty:
+        return np.nan
+    
+    return float(skew_series.iloc[-1])
 
 
 def return_kurtosis(returns: pd.Series, window: int = 60) -> float:
@@ -322,7 +330,15 @@ def return_kurtosis(returns: pd.Series, window: int = 60) -> float:
     Returns:
         峰度值
     """
-    return returns.rolling(window).kurt().iloc[-1]
+    # 检查数据是否足够
+    if len(returns.dropna()) < window:
+        return np.nan
+    
+    kurt_series = returns.rolling(window).kurt()
+    if kurt_series.empty or kurt_series.dropna().empty:
+        return np.nan
+    
+    return float(kurt_series.iloc[-1])
 
 
 def hurst_exponent(prices: pd.Series, max_lag: int = 20) -> float:
@@ -495,7 +511,7 @@ def compute_all_factors(data: Dict[str, pd.DataFrame],
     if factor_names is None:
         factor_names = list(FACTOR_REGISTRY.keys())
     
-    # 获取所有日期
+    # 获取所有日期和股票
     dates = data['close'].index.tolist()
     symbols = data['close'].columns.tolist()
     
@@ -505,51 +521,101 @@ def compute_all_factors(data: Dict[str, pd.DataFrame],
     # 初始化结果 DataFrame
     results = pd.DataFrame(index=index, columns=factor_names, dtype=float)
     
-    # 逐日期计算因子
-    for i, date in enumerate(dates):
-        if i % 100 == 0:
-            print(f"计算因子: {i+1}/{len(dates)} 日期")
+    print(f"开始计算 {len(factor_names)} 个因子，共 {len(symbols)} 只股票")
+    
+    # 逐股票计算因子（时间序列方式）
+    for symbol_idx, symbol in enumerate(symbols):
+        if symbol_idx % 500 == 0:
+            print(f"计算因子: {symbol_idx+1}/{len(symbols)} 股票")
         
-        # 获取当前日期的数据
-        date_data = {}
+        # 为该股票准备历史数据
+        symbol_data = {}
         for key, value in data.items():
             if isinstance(value, pd.DataFrame):
-                if date in value.index:
-                    date_data[key] = value.loc[date]
-            else:
-                date_data[key] = value
+                if symbol in value.columns:
+                    symbol_data[key] = value[symbol]  # 获取该股票的时间序列
+            elif isinstance(value, pd.Series):
+                symbol_data[key] = value  # 市场收益率等是 Series
         
-        # 计算每个因子
-        for factor_name in factor_names:
-            if factor_name not in FACTOR_REGISTRY:
-                continue
-            
-            factor_info = FACTOR_REGISTRY[factor_name]
-            func = factor_info['func']
-            requires = factor_info['requires']
-            
-            # 检查所需数据
-            missing_data = [r for r in requires if r not in date_data]
-            if missing_data:
-                continue
-            
-            try:
-                # 准备参数
-                kwargs = {r: date_data[r] for r in requires}
+            # 为每个日期计算因子
+            for date_idx, date in enumerate(dates):
+                # 获取截止到当前日期的历史数据
+                hist_data = {}
+                for key, value in symbol_data.items():
+                    if isinstance(value, pd.Series):
+                        # 获取截止到当前日期的数据
+                        hist_data[key] = value[:date]
+                    else:
+                        hist_data[key] = value
                 
-                # 计算因子（逐股票）
-                for symbol in symbols:
-                    symbol_data = {r: kwargs[r][symbol] if hasattr(kwargs[r], 'index') else kwargs[r] 
-                                  for r in requires}
+                # 计算每个因子
+                for factor_name in factor_names:
+                    if factor_name not in FACTOR_REGISTRY:
+                        continue
+                    
+                    factor_info = FACTOR_REGISTRY[factor_name]
+                    func = factor_info['func']
+                    requires = factor_info['requires']
+                    
+                    # 检查所需数据
+                    missing_data = [r for r in requires if r not in hist_data]
+                    if missing_data:
+                        continue
+                    
                     try:
-                        value = func(**symbol_data)
-                        results.loc[(date, symbol), factor_name] = value
-                    except:
-                        pass
+                        # 准备参数（传入历史数据）
+                        kwargs = {}
+                        for r in requires:
+                            if r == 'close_prices_matrix':
+                                # rank_velocity 需要整个矩阵
+                                kwargs[r] = data['close'][:date]
+                            elif r in ['market_returns', 'industry_returns']:
+                                # 市场/行业收益率是 Series
+                                kwargs[r] = hist_data[r][:date]
+                            else:
+                                # 股票的时间序列数据
+                                kwargs[r] = hist_data[r][:date]
                         
-            except Exception as e:
-                pass
+                        # 检查数据是否足够
+                        # 对于需要 rolling 计算的因子，至少需要 window 个数据点
+                        min_data_points = 60  # 默认最小数据点数
+                        if 'window' in func.__code__.co_varnames:
+                            # 如果函数有 window 参数，使用它
+                            import inspect
+                            sig = inspect.signature(func)
+                            if 'window' in sig.parameters:
+                                min_data_points = sig.parameters['window'].default
+                        
+                        # 检查主要数据序列的长度
+                        main_data = None
+                        for key in ['returns', 'close', 'prices']:
+                            if key in kwargs:
+                                main_data = kwargs[key]
+                                break
+                        
+                        if main_data is not None:
+                            non_null_count = main_data.dropna().shape[0]
+                            if non_null_count < min_data_points:
+                                # 数据不足，跳过这个日期
+                                continue
+                        
+                        # 计算因子值
+                        value = func(**kwargs)
+                        
+                        # 确保返回的是标量值
+                        if isinstance(value, pd.Series):
+                            # 如果是 Series，取最后一个非 NaN 值
+                            value = value.dropna().iloc[-1] if not value.dropna().empty else np.nan
+                        
+                        # 存储结果
+                        if pd.notna(value):
+                            results.loc[(date, symbol), factor_name] = value
+                            
+                    except Exception:
+                        # 计算失败时保持 NaN
+                        pass
     
+    print(f"因子计算完成")
     return results
 
 
