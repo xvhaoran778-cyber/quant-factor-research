@@ -11,19 +11,19 @@ warnings.filterwarnings('ignore')
 
 def compute_factors_vectorized(data: Dict[str, pd.DataFrame], 
                                factor_names: Optional[List[str]] = None,
-                               max_stocks: int = 1000) -> pd.DataFrame:
+                               max_stocks: Optional[int] = None) -> pd.DataFrame:
     """
     向量化计算因子（优化版）
     
     优化点：
     1. 使用 DataFrame 的 rolling 方法批量计算，避免逐股票循环
-    2. 限制股票数量（默认前 1000 只流动性最好的）
-    3. 一次性计算所有日期的因子
+    2. 一次性计算所有日期的因子
+    3. 支持全量股票（不设上限）
     
     Args:
         data: 数据字典
         factor_names: 因子名称列表
-        max_stocks: 最大股票数量（按流动性排序）
+        max_stocks: 最大股票数量（None 表示不限制）
     
     Returns:
         因子值 DataFrame，索引为 (date, symbol) 的 MultiIndex
@@ -39,27 +39,29 @@ def compute_factors_vectorized(data: Dict[str, pd.DataFrame],
     low = data['low']
     open_price = data['open']
     
-    # 按流动性筛选股票（取成交额最大的前 max_stocks 只）
-    if 'amount' in data:
-        avg_amount = data['amount'].mean()
-        top_stocks = avg_amount.nlargest(max_stocks).index
-    else:
-        # 如果没有成交额数据，按成交量排序
-        avg_volume = volume.mean()
-        top_stocks = avg_volume.nlargest(max_stocks).index
-    
-    # 筛选股票
-    close_prices = close_prices[top_stocks]
-    returns = returns[top_stocks]
-    volume = volume[top_stocks]
-    high = high[top_stocks]
-    low = low[top_stocks]
-    open_price = open_price[top_stocks]
+    # 可选：按流动性筛选股票
+    if max_stocks is not None:
+        if 'amount' in data:
+            avg_amount = data['amount'].mean()
+            top_stocks = avg_amount.nlargest(max_stocks).index
+        else:
+            # 如果没有成交额数据，按成交量排序
+            avg_volume = volume.mean()
+            top_stocks = avg_volume.nlargest(max_stocks).index
+        
+        # 筛选股票
+        close_prices = close_prices[top_stocks]
+        returns = returns[top_stocks]
+        volume = volume[top_stocks]
+        high = high[top_stocks]
+        low = low[top_stocks]
+        open_price = open_price[top_stocks]
+        print(f"按流动性筛选前 {max_stocks} 只股票")
     
     dates = close_prices.index
     symbols = close_prices.columns
     
-    print(f"开始计算 {len(factor_names)} 个因子，共 {len(symbols)} 只股票（按流动性筛选）")
+    print(f"开始计算 {len(factor_names)} 个因子，共 {len(symbols)} 只股票")
     
     # 创建 MultiIndex
     index = pd.MultiIndex.from_product([dates, symbols], names=['date', 'symbol'])

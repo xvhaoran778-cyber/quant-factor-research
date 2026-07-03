@@ -13,6 +13,7 @@ import sys
 import os
 from pathlib import Path
 import time
+from typing import Optional
 
 # 添加项目根目录到路径
 project_root = Path(__file__).parent
@@ -35,7 +36,7 @@ def run_fast_comparison_experiment(
     data_dir: str = "/Volumes/xhrrrrr_macmini副盘/quantlab/market",
     start_date: str = "2024-01-01",
     end_date: str = "2024-12-31",
-    max_stocks: int = 1000,
+    max_stocks: Optional[int] = None,  # None 表示不限制，使用全部股票
     top_n_factors: int = 5,
     output_file: str = None
 ):
@@ -46,7 +47,7 @@ def run_fast_comparison_experiment(
         data_dir: 数据目录
         start_date: 开始日期
         end_date: 结束日期
-        max_stocks: 最大股票数量
+        max_stocks: 最大股票数量（None 表示不限制，使用全部股票）
         top_n_factors: 选择的最佳因子数量
         output_file: 输出文件路径
     """
@@ -265,7 +266,7 @@ def run_fast_comparison_experiment(
 
 
 if __name__ == "__main__":
-    # 运行快速实验（默认最近 1 年，前 1000 只股票）
+    # 运行快速实验（默认：全部股票，最近 1 年）
     output_dir = project_root / "reports"
     output_dir.mkdir(exist_ok=True)
     
@@ -275,7 +276,7 @@ if __name__ == "__main__":
     run_fast_comparison_experiment(
         start_date="2024-01-01",
         end_date="2024-12-31",
-        max_stocks=1000,
+        max_stocks=None,  # 使用全部股票
         top_n_factors=5,
         output_file=str(output_file)
     )
