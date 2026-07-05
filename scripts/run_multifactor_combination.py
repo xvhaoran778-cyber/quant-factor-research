@@ -29,6 +29,10 @@ FACTORS = [
     "distance_to_high_20",
     "liquidity_acceleration_20",
     "low_drawdown_momentum_60",
+    "market_relative_strength_60",
+    "volatility_squeeze_20",
+    "dry_up_breakout_60",
+    "money_flow_persistence_20",
 ]
 DIRECTIONS = {
     "correlation_breakdown": 1,
@@ -39,6 +43,10 @@ DIRECTIONS = {
     "distance_to_high_20": 1,
     "liquidity_acceleration_20": 1,
     "low_drawdown_momentum_60": 1,
+    "market_relative_strength_60": 1,
+    "volatility_squeeze_20": -1,
+    "dry_up_breakout_60": 1,
+    "money_flow_persistence_20": 1,
 }
 
 
@@ -99,17 +107,19 @@ def score_from_ranks(rank_values: dict[str, pd.Series], weights: dict[str, float
 def quick_screen(panel: pd.DataFrame, combos: list[dict[str, float]], top_n: int = 40) -> list[dict]:
     frame = panel.dropna(subset=["next_open", *FACTORS]).sort_values(["symbol", "date"]).copy()
     frame["future_return"] = frame.groupby("symbol")["next_open"].shift(-1) / frame["next_open"] - 1
+    weekly = []
+    for _, group in frame.groupby("week", sort=True):
+        group = v8_candidate_filter(group.nlargest(min(1000, len(group)), "liquidity")).dropna(subset=["future_return"])
+        if len(group) < 20:
+            continue
+        weekly.append((ranks(group), group["future_return"]))
+
     rows = []
     for weights in combos:
         returns = []
-        for _, group in frame.groupby("week", sort=True):
-            group = v8_candidate_filter(group.nlargest(min(1000, len(group)), "liquidity"))
-            group = group.dropna(subset=["future_return"])
-            if len(group) < 20:
-                continue
-            group = group.copy()
-            group["score"] = score_from_ranks(ranks(group), weights)
-            returns.append(float(group.nlargest(5, "score")["future_return"].mean()))
+        for rank_values, future_return in weekly:
+            score = score_from_ranks(rank_values, weights)
+            returns.append(float(future_return.loc[score.nlargest(5).index].mean()))
         if returns:
             series = pd.Series(returns)
             total = float(series.add(1).prod() - 1)
@@ -140,11 +150,17 @@ def main() -> None:
     combos = weight_grid()
     recent_panel = build_panel(store, date(2024, 1, 1), date(2026, 7, 5))
     screened = quick_screen(recent_panel, combos, top_n=40)
-    recent_backtests = [backtest(recent_panel, row["weights"]) for row in screened[:30]]
+    recent_backtests = [backtest(recent_panel, row["weights"]) for row in screened[:12]]
     recent_backtests.sort(key=lambda row: row["metrics"]["total_return"], reverse=True)
 
-    long_panel = build_panel(store, date(2019, 1, 1), date(2023, 12, 31))
-    validated = [backtest(long_panel, row["weights"]) for row in recent_backtests[:8]]
+    validation_windows = {
+        "2012-2018": build_panel(store, date(2012, 1, 1), date(2018, 12, 31)),
+        "2019-2023": build_panel(store, date(2019, 1, 1), date(2023, 12, 31)),
+    }
+    validated = {
+        label: [backtest(panel, row["weights"]) for row in recent_backtests[:3]]
+        for label, panel in validation_windows.items()
+    }
 
     output = {
         "generated_at": datetime.now().isoformat(timespec="seconds"),
@@ -159,7 +175,7 @@ def main() -> None:
         "recent_backtests": recent_backtests,
         "long_validation": validated,
     }
-    (ROOT / "reports" / "multifactor_return_optimization_results.json").write_text(
+    (ROOT / "reports" / "multifactor_return_long_validation_results.json").write_text(
         json.dumps(output, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )

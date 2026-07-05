@@ -317,6 +317,36 @@ def calc_low_drawdown_momentum_60_vectorized(close_prices, returns, volume, high
     return momentum / max_drawdown.replace(0, np.nan)
 
 
+def calc_market_relative_strength_60_vectorized(close_prices, returns, volume, high, low, open_price, window=60):
+    """相对大盘强度：个股 60 日收益减去全市场等权 60 日收益。"""
+    stock_return = close_prices.pct_change(window)
+    market_return = close_prices.mean(axis=1).pct_change(window)
+    return stock_return.sub(market_return, axis=0)
+
+
+def calc_volatility_squeeze_20_vectorized(close_prices, returns, volume, high, low, open_price, window=20):
+    """波动收缩：20 日平均振幅相对 60 日平均振幅，越低越收缩。"""
+    daily_range = (high - low) / close_prices.replace(0, np.nan)
+    return daily_range.rolling(window).mean() / daily_range.rolling(window * 3).mean().replace(0, np.nan)
+
+
+def calc_dry_up_breakout_60_vectorized(close_prices, returns, volume, high, low, open_price, window=60):
+    """缩量突破：区间高位位置乘以低量能拥挤度。"""
+    rolling_low = close_prices.rolling(window).min()
+    rolling_high = close_prices.rolling(window).max()
+    position = (close_prices - rolling_low) / (rolling_high - rolling_low).replace(0, np.nan)
+    volume_ratio = volume.rolling(5).mean() / volume.rolling(20).mean().replace(0, np.nan)
+    calm_volume = (1 / volume_ratio.replace(0, np.nan)).clip(upper=3)
+    return position * calm_volume
+
+
+def calc_money_flow_persistence_20_vectorized(close_prices, returns, volume, high, low, open_price, window=20):
+    """资金流持续性：涨跌方向加权成交额占比。"""
+    amount_proxy = close_prices * volume
+    signed_amount = amount_proxy * np.sign(returns.fillna(0))
+    return signed_amount.rolling(window).sum() / amount_proxy.rolling(window).sum().replace(0, np.nan)
+
+
 # ============================================================================
 # 向量化因子注册表
 # ============================================================================
@@ -470,6 +500,30 @@ FACTOR_REGISTRY_VECTORIZED = {
         'func': calc_low_drawdown_momentum_60_vectorized,
         'category': '趋势质量',
         'description': '60 日收益除以 60 日最大回撤',
+        'direction': 'positive',
+    },
+    'market_relative_strength_60': {
+        'func': calc_market_relative_strength_60_vectorized,
+        'category': '相对强度',
+        'description': '个股 60 日收益减全市场等权 60 日收益',
+        'direction': 'positive',
+    },
+    'volatility_squeeze_20': {
+        'func': calc_volatility_squeeze_20_vectorized,
+        'category': '波动结构',
+        'description': '20 日平均振幅相对 60 日平均振幅',
+        'direction': 'negative',
+    },
+    'dry_up_breakout_60': {
+        'func': calc_dry_up_breakout_60_vectorized,
+        'category': '趋势突破',
+        'description': '60 日区间高位位置乘以缩量确认',
+        'direction': 'positive',
+    },
+    'money_flow_persistence_20': {
+        'func': calc_money_flow_persistence_20_vectorized,
+        'category': '资金流',
+        'description': '20 日涨跌方向加权成交额占比',
         'direction': 'positive',
     },
 }
