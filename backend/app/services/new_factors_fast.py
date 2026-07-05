@@ -250,6 +250,73 @@ def calc_herding_indicator_vectorized(close_prices, returns, volume, high, low, 
     return corr_extreme - corr_normal
 
 
+def calc_low_volatility_20_vectorized(close_prices, returns, volume, high, low, open_price, window=20):
+    """短期低波动：值越低越好。"""
+    return returns.rolling(window).std()
+
+
+def calc_downside_volatility_20_vectorized(close_prices, returns, volume, high, low, open_price, window=20):
+    """下行波动：只统计负收益波动，值越低越好。"""
+    downside_returns = returns.where(returns < 0, 0)
+    return downside_returns.rolling(window).std()
+
+
+def calc_risk_adjusted_momentum_20_vectorized(close_prices, returns, volume, high, low, open_price, window=20):
+    """风险调整动量：20 日收益除以 20 日波动。"""
+    momentum = close_prices.pct_change(window)
+    volatility = returns.rolling(window).std()
+    return momentum / volatility.replace(0, np.nan)
+
+
+def calc_trend_consistency_60_vectorized(close_prices, returns, volume, high, low, open_price, window=60):
+    """趋势一致性：过去 60 日收盘价站上 20 日均线的比例。"""
+    ma20 = close_prices.rolling(20).mean()
+    above_ma20 = (close_prices > ma20).astype(float)
+    return above_ma20.rolling(window).mean()
+
+
+def calc_liquidity_strength_20_vectorized(close_prices, returns, volume, high, low, open_price, window=20):
+    """流动性强度：20 日平均成交额代理，值越高越好。"""
+    amount_proxy = close_prices * volume
+    return amount_proxy.rolling(window).mean()
+
+
+def calc_volume_price_confirmation_vectorized(close_prices, returns, volume, high, low, open_price, window=20):
+    """量价确认：20 日动量乘以成交活跃度。"""
+    momentum = close_prices.pct_change(window)
+    volume_base = volume.rolling(window).mean().replace(0, np.nan)
+    volume_ratio = (volume.rolling(5).mean() / volume_base).clip(upper=3)
+    return momentum * volume_ratio
+
+
+def calc_breakout_position_60_vectorized(close_prices, returns, volume, high, low, open_price, window=60):
+    """60 日突破位置：越接近区间高位越强。"""
+    rolling_low = close_prices.rolling(window).min()
+    rolling_high = close_prices.rolling(window).max()
+    return (close_prices - rolling_low) / (rolling_high - rolling_low).replace(0, np.nan)
+
+
+def calc_distance_to_high_20_vectorized(close_prices, returns, volume, high, low, open_price, window=20):
+    """距离 20 日高点：越接近高点越强。"""
+    rolling_high = close_prices.rolling(window).max()
+    return close_prices / rolling_high.replace(0, np.nan) - 1
+
+
+def calc_liquidity_acceleration_20_vectorized(close_prices, returns, volume, high, low, open_price, window=20):
+    """流动性加速：5 日成交额相对 20 日成交额。"""
+    amount_proxy = close_prices * volume
+    return amount_proxy.rolling(5).mean() / amount_proxy.rolling(window).mean().replace(0, np.nan)
+
+
+def calc_low_drawdown_momentum_60_vectorized(close_prices, returns, volume, high, low, open_price, window=60):
+    """低回撤动量：60 日收益除以期间最大回撤绝对值。"""
+    momentum = close_prices.pct_change(window)
+    running_high = close_prices.rolling(window).max()
+    drawdown = close_prices / running_high.replace(0, np.nan) - 1
+    max_drawdown = drawdown.rolling(window).min().abs()
+    return momentum / max_drawdown.replace(0, np.nan)
+
+
 # ============================================================================
 # 向量化因子注册表
 # ============================================================================
@@ -344,5 +411,65 @@ FACTOR_REGISTRY_VECTORIZED = {
         'category': '行为金融',
         'description': '极端市场日的相关性',
         'direction': 'negative',
+    },
+    'low_volatility_20': {
+        'func': calc_low_volatility_20_vectorized,
+        'category': '风险质量',
+        'description': '20 日收益波动率',
+        'direction': 'negative',
+    },
+    'downside_volatility_20': {
+        'func': calc_downside_volatility_20_vectorized,
+        'category': '风险质量',
+        'description': '20 日下行波动率',
+        'direction': 'negative',
+    },
+    'risk_adjusted_momentum_20': {
+        'func': calc_risk_adjusted_momentum_20_vectorized,
+        'category': '趋势质量',
+        'description': '20 日收益除以 20 日波动',
+        'direction': 'positive',
+    },
+    'trend_consistency_60': {
+        'func': calc_trend_consistency_60_vectorized,
+        'category': '趋势质量',
+        'description': '60 日内站上 20 日均线的比例',
+        'direction': 'positive',
+    },
+    'liquidity_strength_20': {
+        'func': calc_liquidity_strength_20_vectorized,
+        'category': '流动性质量',
+        'description': '20 日平均成交额代理',
+        'direction': 'positive',
+    },
+    'volume_price_confirmation': {
+        'func': calc_volume_price_confirmation_vectorized,
+        'category': '量价关系',
+        'description': '20 日动量与成交活跃度确认',
+        'direction': 'positive',
+    },
+    'breakout_position_60': {
+        'func': calc_breakout_position_60_vectorized,
+        'category': '趋势突破',
+        'description': '收盘价在 60 日区间中的相对位置',
+        'direction': 'positive',
+    },
+    'distance_to_high_20': {
+        'func': calc_distance_to_high_20_vectorized,
+        'category': '趋势突破',
+        'description': '距离 20 日高点的比例',
+        'direction': 'positive',
+    },
+    'liquidity_acceleration_20': {
+        'func': calc_liquidity_acceleration_20_vectorized,
+        'category': '流动性质量',
+        'description': '5 日成交额相对 20 日成交额',
+        'direction': 'positive',
+    },
+    'low_drawdown_momentum_60': {
+        'func': calc_low_drawdown_momentum_60_vectorized,
+        'category': '趋势质量',
+        'description': '60 日收益除以 60 日最大回撤',
+        'direction': 'positive',
     },
 }

@@ -1,0 +1,138 @@
+{
+  "strategy": "regime_switch_aggressive_defensive",
+  "rules": {
+    "aggressive": "market_risk_on and market_breadth20 >= 0.45 and market_median_ret20 > -0.02",
+    "defensive": "market_risk_on and market_breadth20 >= 0.40 and market_median_ret20 > -0.04",
+    "cash": "otherwise"
+  },
+  "aggressive_weights": {
+    "correlation_breakdown": 0.0,
+    "low_volatility_20": 0.2,
+    "liquidity_strength_20": 0.4,
+    "downside_volatility_20": 0.0,
+    "breakout_position_60": 0.2,
+    "distance_to_high_20": 0.0,
+    "liquidity_acceleration_20": 0.2,
+    "low_drawdown_momentum_60": 0.0
+  },
+  "defensive_weights": {
+    "correlation_breakdown": 0.1,
+    "low_volatility_20": 0.0,
+    "liquidity_strength_20": 0.6,
+    "downside_volatility_20": 0.3,
+    "breakout_position_60": 0.0,
+    "distance_to_high_20": 0.0,
+    "liquidity_acceleration_20": 0.0,
+    "low_drawdown_momentum_60": 0.0
+  },
+  "windows": [
+    {
+      "label": "2019-2023",
+      "start": "2019-01-01",
+      "end": "2023-12-31",
+      "metrics": {
+        "total_return": -0.142709,
+        "annual_return": -0.031031,
+        "volatility": 0.179958,
+        "sharpe": -0.0867,
+        "max_drawdown": -0.33533,
+        "turnover": 144.3576,
+        "win_rate": 0.4022,
+        "closed_trades": 358,
+        "profit_loss_ratio": 1.386,
+        "yearly_returns": {
+          "2019": 0.245714,
+          "2020": -0.043557,
+          "2021": -0.164143,
+          "2022": -0.054609,
+          "2023": -0.126164
+        }
+      },
+      "regime_counts": {
+        "cash": 132,
+        "aggressive": 110,
+        "defensive": 12
+      },
+      "worst_drawdowns": [
+        {
+          "date": "2023-11-27",
+          "equity": 85729.05,
+          "drawdown": -0.33533
+        },
+        {
+          "date": "2023-12-04",
+          "equity": 85729.05,
+          "drawdown": -0.33533
+        },
+        {
+          "date": "2023-12-11",
+          "equity": 85729.05,
+          "drawdown": -0.33533
+        },
+        {
+          "date": "2023-12-18",
+          "equity": 85729.05,
+          "drawdown": -0.33533
+        },
+        {
+          "date": "2023-12-25",
+          "equity": 85729.05,
+          "drawdown": -0.33533
+        }
+      ]
+    },
+    {
+      "label": "2024-2026",
+      "start": "2024-01-01",
+      "end": "2026-07-05",
+      "metrics": {
+        "total_return": 0.786144,
+        "annual_return": 0.268081,
+        "volatility": 0.262089,
+        "sharpe": 1.0305,
+        "max_drawdown": -0.200642,
+        "turnover": 80.1073,
+        "win_rate": 0.4323,
+        "closed_trades": 192,
+        "profit_loss_ratio": 2.314,
+        "yearly_returns": {
+          "2024": 0.072846,
+          "2025": 0.023747,
+          "2026": 0.454607
+        }
+      },
+      "regime_counts": {
+        "aggressive": 67,
+        "cash": 56,
+        "defensive": 4
+      },
+      "worst_drawdowns": [
+        {
+          "date": "2025-06-30",
+          "equity": 95462.36,
+          "drawdown": -0.200642
+        },
+        {
+          "date": "2025-06-23",
+          "equity": 95533.42,
+          "drawdown": -0.200047
+        },
+        {
+          "date": "2025-06-16",
+          "equity": 95842.17,
+          "drawdown": -0.197462
+        },
+        {
+          "date": "2025-07-07",
+          "equity": 96516.57,
+          "drawdown": -0.191815
+        },
+        {
+          "date": "2025-06-09",
+          "equity": 96698.4,
+          "drawdown": -0.190292
+        }
+      ]
+    }
+  ]
+}
