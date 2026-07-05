@@ -100,7 +100,8 @@ def ranks(group: pd.DataFrame) -> dict[str, pd.Series]:
 def score_from_ranks(rank_values: dict[str, pd.Series], weights: dict[str, float]) -> pd.Series:
     score = next(iter(rank_values.values())) * 0
     for name, weight in weights.items():
-        score += rank_values[name] * weight
+        if weight:
+            score += rank_values[name] * weight
     return score
 
 
