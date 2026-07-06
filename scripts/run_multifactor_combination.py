@@ -33,6 +33,10 @@ FACTORS = [
     "volatility_squeeze_20",
     "dry_up_breakout_60",
     "money_flow_persistence_20",
+    "short_reversal_5",
+    "medium_reversal_20",
+    "calm_pullback_20",
+    "drawdown_recovery_60",
 ]
 DIRECTIONS = {
     "correlation_breakdown": 1,
@@ -47,6 +51,10 @@ DIRECTIONS = {
     "volatility_squeeze_20": -1,
     "dry_up_breakout_60": 1,
     "money_flow_persistence_20": 1,
+    "short_reversal_5": 1,
+    "medium_reversal_20": 1,
+    "calm_pullback_20": 1,
+    "drawdown_recovery_60": 1,
 }
 
 

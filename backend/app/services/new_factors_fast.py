@@ -347,6 +347,31 @@ def calc_money_flow_persistence_20_vectorized(close_prices, returns, volume, hig
     return signed_amount.rolling(window).sum() / amount_proxy.rolling(window).sum().replace(0, np.nan)
 
 
+def calc_short_reversal_5_vectorized(close_prices, returns, volume, high, low, open_price, window=5):
+    """短期反转：近 5 日跌幅越大，反转分越高。"""
+    return -close_prices.pct_change(window)
+
+
+def calc_medium_reversal_20_vectorized(close_prices, returns, volume, high, low, open_price, window=20):
+    """中期反转：近 20 日跌幅越大，反转分越高。"""
+    return -close_prices.pct_change(window)
+
+
+def calc_calm_pullback_20_vectorized(close_prices, returns, volume, high, low, open_price, window=20):
+    """低波动回调：回调幅度除以波动，偏好温和下跌后的修复。"""
+    pullback = -close_prices.pct_change(window)
+    volatility = returns.rolling(window).std()
+    return pullback / volatility.replace(0, np.nan)
+
+
+def calc_drawdown_recovery_60_vectorized(close_prices, returns, volume, high, low, open_price, window=60):
+    """回撤修复：距离 60 日高点越远但近 5 日越强，分数越高。"""
+    high_60 = close_prices.rolling(window).max()
+    drawdown = close_prices / high_60.replace(0, np.nan) - 1
+    rebound = close_prices.pct_change(5)
+    return (-drawdown) * rebound
+
+
 # ============================================================================
 # 向量化因子注册表
 # ============================================================================
@@ -524,6 +549,30 @@ FACTOR_REGISTRY_VECTORIZED = {
         'func': calc_money_flow_persistence_20_vectorized,
         'category': '资金流',
         'description': '20 日涨跌方向加权成交额占比',
+        'direction': 'positive',
+    },
+    'short_reversal_5': {
+        'func': calc_short_reversal_5_vectorized,
+        'category': '反转修复',
+        'description': '近 5 日反向收益',
+        'direction': 'positive',
+    },
+    'medium_reversal_20': {
+        'func': calc_medium_reversal_20_vectorized,
+        'category': '反转修复',
+        'description': '近 20 日反向收益',
+        'direction': 'positive',
+    },
+    'calm_pullback_20': {
+        'func': calc_calm_pullback_20_vectorized,
+        'category': '反转修复',
+        'description': '20 日回调幅度除以波动',
+        'direction': 'positive',
+    },
+    'drawdown_recovery_60': {
+        'func': calc_drawdown_recovery_60_vectorized,
+        'category': '反转修复',
+        'description': '60 日回撤深度乘以近 5 日修复强度',
         'direction': 'positive',
     },
 }
