@@ -198,27 +198,12 @@ def calc_rank_velocity_vectorized(close_prices, returns, volume, high, low, open
 
 
 def calc_industry_relative_strength_vectorized(close_prices, returns, volume, high, low, open_price, window=20):
-    """行业相对强度 - 向量化版本（简化版）"""
-    # 将所有股票分为3个行业（简单分组）
-    n_stocks = len(returns.columns)
-    industry_size = n_stocks // 3
-    
-    # 计算每个行业的平均收益
-    industry_1 = returns.iloc[:, :industry_size].mean(axis=1)
-    industry_2 = returns.iloc[:, industry_size:2*industry_size].mean(axis=1)
-    industry_3 = returns.iloc[:, 2*industry_size:].mean(axis=1)
-    
-    # 为每个股票分配行业收益
-    industry_returns = pd.DataFrame(index=returns.index, columns=returns.columns)
-    industry_returns.iloc[:, :industry_size] = industry_1.values[:, None]
-    industry_returns.iloc[:, industry_size:2*industry_size] = industry_2.values[:, None]
-    industry_returns.iloc[:, 2*industry_size:] = industry_3.values[:, None]
-    
-    # 计算相对强度
-    stock_cumret = returns.rolling(window).sum()
-    ind_cumret = industry_returns.rolling(window).sum()
-    
-    return stock_cumret - ind_cumret
+    """行业相对强度。
+
+    ponytail: no real point-in-time industry map is passed here; returning NaN
+    prevents fake equal-split "industries" from entering factor ranks.
+    """
+    return pd.DataFrame(np.nan, index=returns.index, columns=returns.columns)
 
 
 def calc_overreaction_reversal_vectorized(close_prices, returns, volume, high, low, open_price, window=20, threshold=2):
@@ -416,7 +401,7 @@ FACTOR_REGISTRY_VECTORIZED = {
     'disposition_effect': {
         'func': calc_disposition_effect_vectorized,
         'category': '行为金融',
-        'description': '距离 250 日高点的距离',
+        'description': '处置效应代理：距离 250 日高点的距离，不等同于账户级处置效应定义',
         'direction': 'negative',
     },
     'order_flow_imbalance': {
@@ -428,7 +413,7 @@ FACTOR_REGISTRY_VECTORIZED = {
     'alpha_momentum': {
         'func': calc_alpha_momentum_vectorized,
         'category': '横截面关系',
-        'description': 'CAPM 残差的动量（去除市场影响）',
+        'description': 'Alpha 动量代理：个股收益减等权市场收益的滚动和，不是完整 CAPM/多因子 alpha',
         'direction': 'positive',
     },
     'correlation_breakdown': {
@@ -440,7 +425,7 @@ FACTOR_REGISTRY_VECTORIZED = {
     'hurst_exponent': {
         'func': calc_hurst_exponent_vectorized,
         'category': '统计分布',
-        'description': '衡量时间序列的长记忆性',
+        'description': 'Hurst 代理：短长窗口波动率比值，不等同于严格 R/S 或 DFA 估计',
         'direction': 'positive',
     },
     'rank_velocity': {
@@ -452,7 +437,7 @@ FACTOR_REGISTRY_VECTORIZED = {
     'industry_relative_strength': {
         'func': calc_industry_relative_strength_vectorized,
         'category': '横截面关系',
-        'description': '相对行业的超额收益',
+        'description': '已禁用：缺少真实 PIT 行业分类时返回空值，避免等分股票伪行业',
         'direction': 'positive',
     },
     'overreaction_reversal': {

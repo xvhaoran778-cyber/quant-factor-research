@@ -77,6 +77,8 @@ def weight_grid(step: int = 5) -> list[dict[str, float]]:
 def factor_panel(store: ParquetMarketStore, start: date, end: date) -> pd.DataFrame:
     warmup = start - timedelta(days=365)
     daily = store.read(warmup, end, symbols=None, fill_suspensions=False)
+    daily["date"] = pd.to_datetime(daily["date"])
+    daily = store.filter_point_in_time_universe(daily)
     close = daily.pivot(index="date", columns="symbol", values="close")
     data = {
         "close": close,
@@ -114,6 +116,7 @@ def score_from_ranks(rank_values: dict[str, pd.Series], weights: dict[str, float
 
 
 def quick_screen(panel: pd.DataFrame, combos: list[dict[str, float]], top_n: int = 40) -> list[dict]:
+    """Supervised training screen; never use its scores as validation results."""
     frame = panel.dropna(subset=["next_open", *FACTORS]).sort_values(["symbol", "date"]).copy()
     frame["future_return"] = frame.groupby("symbol")["next_open"].shift(-1) / frame["next_open"] - 1
     weekly = []
@@ -157,14 +160,15 @@ def backtest(panel: pd.DataFrame, weights: dict[str, float]) -> dict:
 def main() -> None:
     store = ParquetMarketStore(MARKET_DIR)
     combos = weight_grid()
+    training_panel = build_panel(store, date(2019, 1, 1), date(2023, 12, 31))
+    screened = quick_screen(training_panel, combos, top_n=40)
     recent_panel = build_panel(store, date(2024, 1, 1), date(2026, 7, 5))
-    screened = quick_screen(recent_panel, combos, top_n=40)
     recent_backtests = [backtest(recent_panel, row["weights"]) for row in screened[:12]]
     recent_backtests.sort(key=lambda row: row["metrics"]["total_return"], reverse=True)
 
     validation_windows = {
         "2012-2018": build_panel(store, date(2012, 1, 1), date(2018, 12, 31)),
-        "2019-2023": build_panel(store, date(2019, 1, 1), date(2023, 12, 31)),
+        "2019-2023_training_resample": training_panel,
     }
     validated = {
         label: [backtest(panel, row["weights"]) for row in recent_backtests[:3]]
@@ -177,6 +181,7 @@ def main() -> None:
         "factors": FACTORS,
         "directions": DIRECTIONS,
         "formula": "sum(weight_i * cross_section_rank(adjusted_factor_i))",
+        "screening_note": "quick_screen uses next-week open-to-open return as a training label only; 2024-2026 is not used to select weights.",
         "objective": "total_return",
         "grid_step": 0.2,
         "screened_combinations": len(combos),

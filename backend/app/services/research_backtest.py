@@ -261,9 +261,21 @@ PRESETS = {
     },
 }
 
+CURRENT_PRESET_IDS = (
+    "alpha191_042_061_095_v3",
+    "liquidity_strength_rotation_guarded",
+    "low_vol_style_rotation",
+    "weekly_multi_factor_guarded",
+)
+RUNNABLE_PRESET_IDS = tuple(preset_id for preset_id in CURRENT_PRESET_IDS if not PRESETS[preset_id].get("dedicated_engine"))
+
 
 def preset_catalog() -> list[dict]:
     return [{"id": key, **value} for key, value in PRESETS.items()]
+
+
+def current_preset_catalog() -> list[dict]:
+    return [{"id": key, **PRESETS[key]} for key in CURRENT_PRESET_IDS]
 
 
 for definition in PRESETS.values():
@@ -606,8 +618,10 @@ def run_scored_backtest(panel: pd.DataFrame, score_fn, top_n: int = 10, initial_
     rebalances: list[dict] = []
     equity_points: list[dict] = []
     closed_pnls: list[float] = []
+    benchmark_returns: list[float] = []
     turnover = 0.0
     last_prices: dict[str, float] = {}
+    benchmark_last_prices: dict[str, float] = {}
     grouped = list(panel.groupby("week", sort=True))
     total_weeks = len(grouped)
     for week_index, (week, raw_group) in enumerate(grouped, start=1):
@@ -644,6 +658,14 @@ def run_scored_backtest(panel: pd.DataFrame, score_fn, top_n: int = 10, initial_
             targets = liquid.iloc[0:0]
         market = executable.set_index("symbol")
         valid_prices = market["next_open"].dropna()
+        common_symbols = valid_prices.index.intersection(pd.Index(benchmark_last_prices.keys()))
+        if len(common_symbols):
+            current = valid_prices.loc[common_symbols].astype(float)
+            previous = pd.Series(benchmark_last_prices).loc[common_symbols].astype(float)
+            benchmark_returns.append(float((current / previous - 1).replace([np.inf, -np.inf], np.nan).dropna().mean()))
+        elif benchmark_returns:
+            benchmark_returns.append(0.0)
+        benchmark_last_prices = dict(zip(valid_prices.index, valid_prices.astype(float), strict=False))
         last_prices.update(dict(zip(valid_prices.index, valid_prices.astype(float), strict=False)))
         target_symbols = set(targets["symbol"])
         for symbol in sorted(set(positions) - target_symbols):
@@ -723,12 +745,19 @@ def run_scored_backtest(panel: pd.DataFrame, score_fn, top_n: int = 10, initial_
     returns = equity_with_initial.pct_change().dropna()
     total_return = equity.iloc[-1] / initial_cash - 1 if not equity.empty else 0
     volatility = returns.std() * np.sqrt(52) if len(returns) > 1 else 0
+    drawdown = equity_with_initial / equity_with_initial.cummax() - 1
+    drawdown_periods = (drawdown < 0).astype(int)
+    max_drawdown_duration = int(drawdown_periods.groupby((drawdown_periods == 0).cumsum()).sum().max()) if len(drawdown_periods) else 0
+    benchmark_total_return = float(pd.Series(benchmark_returns).add(1).prod() - 1) if benchmark_returns else 0.0
     metrics = {
         "total_return": round(float(total_return), 6),
         "annual_return": round(float((1 + total_return) ** (52 / max(len(returns), 1)) - 1), 6) if total_return > -1 else -1,
         "volatility": round(float(volatility), 6),
         "sharpe": round(float(returns.mean() / returns.std() * np.sqrt(52)), 4) if len(returns) > 1 and returns.std() else 0,
-        "max_drawdown": round(float((equity_with_initial / equity_with_initial.cummax() - 1).min()), 6) if not equity.empty else 0,
+        "max_drawdown": round(float(drawdown.min()), 6) if not equity.empty else 0,
+        "max_drawdown_duration_weeks": max_drawdown_duration,
+        "benchmark_total_return": round(benchmark_total_return, 6),
+        "excess_return": round(float(total_return - benchmark_total_return), 6),
         "turnover": round(turnover / initial_cash, 4),
     }
     metrics.update({
@@ -736,6 +765,14 @@ def run_scored_backtest(panel: pd.DataFrame, score_fn, top_n: int = 10, initial_
         "closed_trades": len(closed_pnls),
         "profit_loss_ratio": round(float(np.mean([p for p in closed_pnls if p > 0]) / abs(np.mean([p for p in closed_pnls if p < 0]))), 3) if any(p > 0 for p in closed_pnls) and any(p < 0 for p in closed_pnls) else 0,
     })
+    if equity_points:
+        yearly = pd.DataFrame(equity_points)
+        yearly["date"] = pd.to_datetime(yearly["date"])
+        metrics["yearly_returns"] = {
+            int(year): round(float(group["equity"].iloc[-1] / group["equity"].iloc[0] - 1), 6)
+            for year, group in yearly.groupby(yearly["date"].dt.year)
+            if len(group) > 1
+        }
     return {
         "metrics": metrics,
         "equity": equity_points,
