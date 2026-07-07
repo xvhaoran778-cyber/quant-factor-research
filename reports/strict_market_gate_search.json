@@ -1,0 +1,1832 @@
+{
+  "generated_at": "2026-07-07T13:37:16",
+  "target": "annual_return >= 20% in every validation window",
+  "top": [
+    {
+      "preset_id": "low_vol_style_rotation",
+      "breadth20": 0.55,
+      "median_ret20": -0.01,
+      "vol_ceiling": 0.35,
+      "passes_20pct_all_windows": false,
+      "score": -0.17473091666666668,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.023783,
+          "annual_return": -0.0035,
+          "volatility": 0.094283,
+          "sharpe": 0.009,
+          "max_drawdown": -0.256085,
+          "max_drawdown_duration_weeks": 349,
+          "benchmark_total_return": -0.071095,
+          "excess_return": 0.047312,
+          "turnover": 78.3878,
+          "win_rate": 0.3951,
+          "closed_trades": 243,
+          "profit_loss_ratio": 1.487,
+          "yearly_returns": {
+            "2012": -0.048351,
+            "2013": -0.112823,
+            "2014": -0.009522,
+            "2015": -0.030078,
+            "2016": 0.016421,
+            "2017": 0.16115,
+            "2018": 0.020584
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.068372,
+          "annual_return": -0.014394,
+          "volatility": 0.098658,
+          "sharpe": -0.0973,
+          "max_drawdown": -0.199255,
+          "max_drawdown_duration_weeks": 163,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.526072,
+          "turnover": 45.1474,
+          "win_rate": 0.4538,
+          "closed_trades": 119,
+          "profit_loss_ratio": 1.06,
+          "yearly_returns": {
+            "2019": 0.080931,
+            "2020": -0.048972,
+            "2021": -0.025753,
+            "2022": 0.034796,
+            "2023": -0.132447
+          }
+        },
+        "2024-2026": {
+          "total_return": 0.051683,
+          "annual_return": 0.020847,
+          "volatility": 0.097696,
+          "sharpe": 0.2589,
+          "max_drawdown": -0.066542,
+          "max_drawdown_duration_weeks": 21,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.269889,
+          "turnover": 25.9518,
+          "win_rate": 0.4857,
+          "closed_trades": 70,
+          "profit_loss_ratio": 1.264,
+          "yearly_returns": {
+            "2024": 0.0,
+            "2025": 0.035375,
+            "2026": 0.01575
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_style_rotation",
+      "breadth20": 0.55,
+      "median_ret20": 0.0,
+      "vol_ceiling": 0.35,
+      "passes_20pct_all_windows": false,
+      "score": -0.17473091666666668,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.023783,
+          "annual_return": -0.0035,
+          "volatility": 0.094283,
+          "sharpe": 0.009,
+          "max_drawdown": -0.256085,
+          "max_drawdown_duration_weeks": 349,
+          "benchmark_total_return": -0.071095,
+          "excess_return": 0.047312,
+          "turnover": 78.3878,
+          "win_rate": 0.3951,
+          "closed_trades": 243,
+          "profit_loss_ratio": 1.487,
+          "yearly_returns": {
+            "2012": -0.048351,
+            "2013": -0.112823,
+            "2014": -0.009522,
+            "2015": -0.030078,
+            "2016": 0.016421,
+            "2017": 0.16115,
+            "2018": 0.020584
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.068372,
+          "annual_return": -0.014394,
+          "volatility": 0.098658,
+          "sharpe": -0.0973,
+          "max_drawdown": -0.199255,
+          "max_drawdown_duration_weeks": 163,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.526072,
+          "turnover": 45.1474,
+          "win_rate": 0.4538,
+          "closed_trades": 119,
+          "profit_loss_ratio": 1.06,
+          "yearly_returns": {
+            "2019": 0.080931,
+            "2020": -0.048972,
+            "2021": -0.025753,
+            "2022": 0.034796,
+            "2023": -0.132447
+          }
+        },
+        "2024-2026": {
+          "total_return": 0.051683,
+          "annual_return": 0.020847,
+          "volatility": 0.097696,
+          "sharpe": 0.2589,
+          "max_drawdown": -0.066542,
+          "max_drawdown_duration_weeks": 21,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.269889,
+          "turnover": 25.9518,
+          "win_rate": 0.4857,
+          "closed_trades": 70,
+          "profit_loss_ratio": 1.264,
+          "yearly_returns": {
+            "2024": 0.0,
+            "2025": 0.035375,
+            "2026": 0.01575
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_style_rotation",
+      "breadth20": 0.45,
+      "median_ret20": 0.01,
+      "vol_ceiling": 0.35,
+      "passes_20pct_all_windows": false,
+      "score": -0.17527191666666667,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.026832,
+          "annual_return": -0.003954,
+          "volatility": 0.094365,
+          "sharpe": 0.0043,
+          "max_drawdown": -0.256085,
+          "max_drawdown_duration_weeks": 349,
+          "benchmark_total_return": -0.071095,
+          "excess_return": 0.044264,
+          "turnover": 76.3616,
+          "win_rate": 0.3866,
+          "closed_trades": 238,
+          "profit_loss_ratio": 1.535,
+          "yearly_returns": {
+            "2012": -0.048351,
+            "2013": -0.112823,
+            "2014": -0.009522,
+            "2015": -0.030078,
+            "2016": 0.016421,
+            "2017": 0.140862,
+            "2018": 0.035489
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.068372,
+          "annual_return": -0.014394,
+          "volatility": 0.098658,
+          "sharpe": -0.0973,
+          "max_drawdown": -0.199255,
+          "max_drawdown_duration_weeks": 163,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.526072,
+          "turnover": 45.1474,
+          "win_rate": 0.4538,
+          "closed_trades": 119,
+          "profit_loss_ratio": 1.06,
+          "yearly_returns": {
+            "2019": 0.080931,
+            "2020": -0.048972,
+            "2021": -0.025753,
+            "2022": 0.034796,
+            "2023": -0.132447
+          }
+        },
+        "2024-2026": {
+          "total_return": 0.048745,
+          "annual_return": 0.019678,
+          "volatility": 0.097797,
+          "sharpe": 0.247,
+          "max_drawdown": -0.066723,
+          "max_drawdown_duration_weeks": 21,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.272827,
+          "turnover": 25.1791,
+          "win_rate": 0.4853,
+          "closed_trades": 68,
+          "profit_loss_ratio": 1.258,
+          "yearly_returns": {
+            "2024": 0.0,
+            "2025": 0.032437,
+            "2026": 0.015795
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_style_rotation",
+      "breadth20": 0.55,
+      "median_ret20": 0.01,
+      "vol_ceiling": 0.35,
+      "passes_20pct_all_windows": false,
+      "score": -0.17527191666666667,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.026832,
+          "annual_return": -0.003954,
+          "volatility": 0.094365,
+          "sharpe": 0.0043,
+          "max_drawdown": -0.256085,
+          "max_drawdown_duration_weeks": 349,
+          "benchmark_total_return": -0.071095,
+          "excess_return": 0.044264,
+          "turnover": 76.3616,
+          "win_rate": 0.3866,
+          "closed_trades": 238,
+          "profit_loss_ratio": 1.535,
+          "yearly_returns": {
+            "2012": -0.048351,
+            "2013": -0.112823,
+            "2014": -0.009522,
+            "2015": -0.030078,
+            "2016": 0.016421,
+            "2017": 0.140862,
+            "2018": 0.035489
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.068372,
+          "annual_return": -0.014394,
+          "volatility": 0.098658,
+          "sharpe": -0.0973,
+          "max_drawdown": -0.199255,
+          "max_drawdown_duration_weeks": 163,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.526072,
+          "turnover": 45.1474,
+          "win_rate": 0.4538,
+          "closed_trades": 119,
+          "profit_loss_ratio": 1.06,
+          "yearly_returns": {
+            "2019": 0.080931,
+            "2020": -0.048972,
+            "2021": -0.025753,
+            "2022": 0.034796,
+            "2023": -0.132447
+          }
+        },
+        "2024-2026": {
+          "total_return": 0.048745,
+          "annual_return": 0.019678,
+          "volatility": 0.097797,
+          "sharpe": 0.247,
+          "max_drawdown": -0.066723,
+          "max_drawdown_duration_weeks": 21,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.272827,
+          "turnover": 25.1791,
+          "win_rate": 0.4853,
+          "closed_trades": 68,
+          "profit_loss_ratio": 1.258,
+          "yearly_returns": {
+            "2024": 0.0,
+            "2025": 0.032437,
+            "2026": 0.015795
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_style_rotation",
+      "breadth20": 0.45,
+      "median_ret20": -0.01,
+      "vol_ceiling": 0.5,
+      "passes_20pct_all_windows": false,
+      "score": -0.19240783333333333,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.134761,
+          "annual_return": -0.020863,
+          "volatility": 0.165913,
+          "sharpe": -0.0445,
+          "max_drawdown": -0.348224,
+          "max_drawdown_duration_weeks": 349,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.063666,
+          "turnover": 129.8199,
+          "win_rate": 0.3805,
+          "closed_trades": 410,
+          "profit_loss_ratio": 1.497,
+          "yearly_returns": {
+            "2012": -0.110503,
+            "2013": -0.089408,
+            "2014": 0.066841,
+            "2015": 0.113135,
+            "2016": -0.141337,
+            "2017": 0.170166,
+            "2018": -0.086171
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.158909,
+          "annual_return": -0.034808,
+          "volatility": 0.175778,
+          "sharpe": -0.115,
+          "max_drawdown": -0.370238,
+          "max_drawdown_duration_weeks": 115,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.616609,
+          "turnover": 109.5293,
+          "win_rate": 0.4229,
+          "closed_trades": 279,
+          "profit_loss_ratio": 1.231,
+          "yearly_returns": {
+            "2019": 0.115514,
+            "2020": -0.032345,
+            "2021": 0.094622,
+            "2022": -0.144971,
+            "2023": -0.173447
+          }
+        },
+        "2024-2026": {
+          "total_return": 0.578628,
+          "annual_return": 0.20555,
+          "volatility": 0.23,
+          "sharpe": 0.925,
+          "max_drawdown": -0.228032,
+          "max_drawdown_duration_weeks": 70,
+          "benchmark_total_return": 0.321572,
+          "excess_return": 0.257056,
+          "turnover": 51.0381,
+          "win_rate": 0.4815,
+          "closed_trades": 135,
+          "profit_loss_ratio": 2.095,
+          "yearly_returns": {
+            "2024": -0.076509,
+            "2025": 0.079662,
+            "2026": 0.53632
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_style_rotation",
+      "breadth20": 0.55,
+      "median_ret20": -0.01,
+      "vol_ceiling": 0.5,
+      "passes_20pct_all_windows": false,
+      "score": -0.21361591666666666,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.185603,
+          "annual_return": -0.029462,
+          "volatility": 0.160276,
+          "sharpe": -0.1066,
+          "max_drawdown": -0.386317,
+          "max_drawdown_duration_weeks": 349,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.114508,
+          "turnover": 108.8746,
+          "win_rate": 0.388,
+          "closed_trades": 366,
+          "profit_loss_ratio": 1.376,
+          "yearly_returns": {
+            "2012": -0.097133,
+            "2013": -0.173298,
+            "2014": 0.09223,
+            "2015": 0.115642,
+            "2016": -0.141051,
+            "2017": 0.157774,
+            "2018": -0.081506
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.042218,
+          "annual_return": -0.008792,
+          "volatility": 0.160467,
+          "sharpe": 0.0236,
+          "max_drawdown": -0.34423,
+          "max_drawdown_duration_weeks": 115,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.499918,
+          "turnover": 91.4745,
+          "win_rate": 0.4227,
+          "closed_trades": 220,
+          "profit_loss_ratio": 1.32,
+          "yearly_returns": {
+            "2019": 0.125149,
+            "2020": 0.012359,
+            "2021": 0.060734,
+            "2022": -0.115967,
+            "2023": -0.133646
+          }
+        },
+        "2024-2026": {
+          "total_return": 0.249054,
+          "annual_return": 0.09533,
+          "volatility": 0.175433,
+          "sharpe": 0.6046,
+          "max_drawdown": -0.176879,
+          "max_drawdown_duration_weeks": 80,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.072517,
+          "turnover": 42.8114,
+          "win_rate": 0.5221,
+          "closed_trades": 113,
+          "profit_loss_ratio": 1.449,
+          "yearly_returns": {
+            "2024": -0.032165,
+            "2025": 0.093981,
+            "2026": 0.179696
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_style_rotation",
+      "breadth20": 0.55,
+      "median_ret20": 0.0,
+      "vol_ceiling": 0.5,
+      "passes_20pct_all_windows": false,
+      "score": -0.21361591666666666,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.185603,
+          "annual_return": -0.029462,
+          "volatility": 0.160276,
+          "sharpe": -0.1066,
+          "max_drawdown": -0.386317,
+          "max_drawdown_duration_weeks": 349,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.114508,
+          "turnover": 108.8746,
+          "win_rate": 0.388,
+          "closed_trades": 366,
+          "profit_loss_ratio": 1.376,
+          "yearly_returns": {
+            "2012": -0.097133,
+            "2013": -0.173298,
+            "2014": 0.09223,
+            "2015": 0.115642,
+            "2016": -0.141051,
+            "2017": 0.157774,
+            "2018": -0.081506
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.042218,
+          "annual_return": -0.008792,
+          "volatility": 0.160467,
+          "sharpe": 0.0236,
+          "max_drawdown": -0.34423,
+          "max_drawdown_duration_weeks": 115,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.499918,
+          "turnover": 91.4745,
+          "win_rate": 0.4227,
+          "closed_trades": 220,
+          "profit_loss_ratio": 1.32,
+          "yearly_returns": {
+            "2019": 0.125149,
+            "2020": 0.012359,
+            "2021": 0.060734,
+            "2022": -0.115967,
+            "2023": -0.133646
+          }
+        },
+        "2024-2026": {
+          "total_return": 0.249054,
+          "annual_return": 0.09533,
+          "volatility": 0.175433,
+          "sharpe": 0.6046,
+          "max_drawdown": -0.176879,
+          "max_drawdown_duration_weeks": 80,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.072517,
+          "turnover": 42.8114,
+          "win_rate": 0.5221,
+          "closed_trades": 113,
+          "profit_loss_ratio": 1.449,
+          "yearly_returns": {
+            "2024": -0.032165,
+            "2025": 0.093981,
+            "2026": 0.179696
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_style_rotation",
+      "breadth20": 0.45,
+      "median_ret20": 0.01,
+      "vol_ceiling": 0.5,
+      "passes_20pct_all_windows": false,
+      "score": -0.21847691666666666,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.201584,
+          "annual_return": -0.03226,
+          "volatility": 0.161135,
+          "sharpe": -0.1231,
+          "max_drawdown": -0.386317,
+          "max_drawdown_duration_weeks": 349,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.130489,
+          "turnover": 107.782,
+          "win_rate": 0.3829,
+          "closed_trades": 363,
+          "profit_loss_ratio": 1.388,
+          "yearly_returns": {
+            "2012": -0.097133,
+            "2013": -0.173298,
+            "2014": 0.073082,
+            "2015": 0.115823,
+            "2016": -0.140752,
+            "2017": 0.135282,
+            "2018": -0.065408
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.042218,
+          "annual_return": -0.008792,
+          "volatility": 0.160467,
+          "sharpe": 0.0236,
+          "max_drawdown": -0.34423,
+          "max_drawdown_duration_weeks": 115,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.499918,
+          "turnover": 91.4745,
+          "win_rate": 0.4227,
+          "closed_trades": 220,
+          "profit_loss_ratio": 1.32,
+          "yearly_returns": {
+            "2019": 0.125149,
+            "2020": 0.012359,
+            "2021": 0.060734,
+            "2022": -0.115967,
+            "2023": -0.133646
+          }
+        },
+        "2024-2026": {
+          "total_return": 0.381393,
+          "annual_return": 0.141439,
+          "volatility": 0.188286,
+          "sharpe": 0.7943,
+          "max_drawdown": -0.176879,
+          "max_drawdown_duration_weeks": 80,
+          "benchmark_total_return": 0.321572,
+          "excess_return": 0.059822,
+          "turnover": 42.7936,
+          "win_rate": 0.531,
+          "closed_trades": 113,
+          "profit_loss_ratio": 1.687,
+          "yearly_returns": {
+            "2024": -0.032165,
+            "2025": 0.088845,
+            "2026": 0.310841
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_style_rotation",
+      "breadth20": 0.55,
+      "median_ret20": 0.01,
+      "vol_ceiling": 0.5,
+      "passes_20pct_all_windows": false,
+      "score": -0.22032525000000003,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.190141,
+          "annual_return": -0.030252,
+          "volatility": 0.160184,
+          "sharpe": -0.1118,
+          "max_drawdown": -0.386317,
+          "max_drawdown_duration_weeks": 349,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.119046,
+          "turnover": 106.7974,
+          "win_rate": 0.3823,
+          "closed_trades": 361,
+          "profit_loss_ratio": 1.403,
+          "yearly_returns": {
+            "2012": -0.097133,
+            "2013": -0.173298,
+            "2014": 0.09223,
+            "2015": 0.115642,
+            "2016": -0.141051,
+            "2017": 0.1322,
+            "2018": -0.065993
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.042218,
+          "annual_return": -0.008792,
+          "volatility": 0.160467,
+          "sharpe": 0.0236,
+          "max_drawdown": -0.34423,
+          "max_drawdown_duration_weeks": 115,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.499918,
+          "turnover": 91.4745,
+          "win_rate": 0.4227,
+          "closed_trades": 220,
+          "profit_loss_ratio": 1.32,
+          "yearly_returns": {
+            "2019": 0.125149,
+            "2020": 0.012359,
+            "2021": 0.060734,
+            "2022": -0.115967,
+            "2023": -0.133646
+          }
+        },
+        "2024-2026": {
+          "total_return": 0.245248,
+          "annual_return": 0.093962,
+          "volatility": 0.175362,
+          "sharpe": 0.5976,
+          "max_drawdown": -0.176879,
+          "max_drawdown_duration_weeks": 80,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.076323,
+          "turnover": 41.8407,
+          "win_rate": 0.5225,
+          "closed_trades": 111,
+          "profit_loss_ratio": 1.446,
+          "yearly_returns": {
+            "2024": -0.032165,
+            "2025": 0.088845,
+            "2026": 0.181649
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_style_rotation",
+      "breadth20": 0.65,
+      "median_ret20": -0.01,
+      "vol_ceiling": 0.5,
+      "passes_20pct_all_windows": false,
+      "score": -0.2498635,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.008703,
+          "annual_return": -0.001272,
+          "volatility": 0.148641,
+          "sharpe": 0.0645,
+          "max_drawdown": -0.332846,
+          "max_drawdown_duration_weeks": 349,
+          "benchmark_total_return": -0.071095,
+          "excess_return": 0.062392,
+          "turnover": 98.128,
+          "win_rate": 0.3824,
+          "closed_trades": 306,
+          "profit_loss_ratio": 1.604,
+          "yearly_returns": {
+            "2012": -0.093137,
+            "2013": -0.177289,
+            "2014": 0.16398,
+            "2015": 0.100122,
+            "2016": -0.046494,
+            "2017": 0.115018,
+            "2018": -0.011539
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.08683,
+          "annual_return": -0.018424,
+          "volatility": 0.100837,
+          "sharpe": -0.1333,
+          "max_drawdown": -0.18122,
+          "max_drawdown_duration_weeks": 241,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.54453,
+          "turnover": 48.9016,
+          "win_rate": 0.4179,
+          "closed_trades": 134,
+          "profit_loss_ratio": 1.224,
+          "yearly_returns": {
+            "2019": 0.056366,
+            "2020": -0.066577,
+            "2021": 0.015108,
+            "2022": -0.048884,
+            "2023": -0.072478
+          }
+        },
+        "2024-2026": {
+          "total_return": -0.048356,
+          "annual_return": -0.02009,
+          "volatility": 0.157052,
+          "sharpe": -0.0528,
+          "max_drawdown": -0.188083,
+          "max_drawdown_duration_weeks": 88,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.369928,
+          "turnover": 33.4063,
+          "win_rate": 0.4409,
+          "closed_trades": 93,
+          "profit_loss_ratio": 1.122,
+          "yearly_returns": {
+            "2024": -0.035511,
+            "2025": -0.042781,
+            "2026": 0.030779
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_style_rotation",
+      "breadth20": 0.65,
+      "median_ret20": 0.0,
+      "vol_ceiling": 0.5,
+      "passes_20pct_all_windows": false,
+      "score": -0.2498635,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.008703,
+          "annual_return": -0.001272,
+          "volatility": 0.148641,
+          "sharpe": 0.0645,
+          "max_drawdown": -0.332846,
+          "max_drawdown_duration_weeks": 349,
+          "benchmark_total_return": -0.071095,
+          "excess_return": 0.062392,
+          "turnover": 98.128,
+          "win_rate": 0.3824,
+          "closed_trades": 306,
+          "profit_loss_ratio": 1.604,
+          "yearly_returns": {
+            "2012": -0.093137,
+            "2013": -0.177289,
+            "2014": 0.16398,
+            "2015": 0.100122,
+            "2016": -0.046494,
+            "2017": 0.115018,
+            "2018": -0.011539
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.08683,
+          "annual_return": -0.018424,
+          "volatility": 0.100837,
+          "sharpe": -0.1333,
+          "max_drawdown": -0.18122,
+          "max_drawdown_duration_weeks": 241,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.54453,
+          "turnover": 48.9016,
+          "win_rate": 0.4179,
+          "closed_trades": 134,
+          "profit_loss_ratio": 1.224,
+          "yearly_returns": {
+            "2019": 0.056366,
+            "2020": -0.066577,
+            "2021": 0.015108,
+            "2022": -0.048884,
+            "2023": -0.072478
+          }
+        },
+        "2024-2026": {
+          "total_return": -0.048356,
+          "annual_return": -0.02009,
+          "volatility": 0.157052,
+          "sharpe": -0.0528,
+          "max_drawdown": -0.188083,
+          "max_drawdown_duration_weeks": 88,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.369928,
+          "turnover": 33.4063,
+          "win_rate": 0.4409,
+          "closed_trades": 93,
+          "profit_loss_ratio": 1.122,
+          "yearly_returns": {
+            "2024": -0.035511,
+            "2025": -0.042781,
+            "2026": 0.030779
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_style_rotation",
+      "breadth20": 0.65,
+      "median_ret20": 0.01,
+      "vol_ceiling": 0.5,
+      "passes_20pct_all_windows": false,
+      "score": -0.2498635,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.008703,
+          "annual_return": -0.001272,
+          "volatility": 0.148641,
+          "sharpe": 0.0645,
+          "max_drawdown": -0.332846,
+          "max_drawdown_duration_weeks": 349,
+          "benchmark_total_return": -0.071095,
+          "excess_return": 0.062392,
+          "turnover": 98.128,
+          "win_rate": 0.3824,
+          "closed_trades": 306,
+          "profit_loss_ratio": 1.604,
+          "yearly_returns": {
+            "2012": -0.093137,
+            "2013": -0.177289,
+            "2014": 0.16398,
+            "2015": 0.100122,
+            "2016": -0.046494,
+            "2017": 0.115018,
+            "2018": -0.011539
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.08683,
+          "annual_return": -0.018424,
+          "volatility": 0.100837,
+          "sharpe": -0.1333,
+          "max_drawdown": -0.18122,
+          "max_drawdown_duration_weeks": 241,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.54453,
+          "turnover": 48.9016,
+          "win_rate": 0.4179,
+          "closed_trades": 134,
+          "profit_loss_ratio": 1.224,
+          "yearly_returns": {
+            "2019": 0.056366,
+            "2020": -0.066577,
+            "2021": 0.015108,
+            "2022": -0.048884,
+            "2023": -0.072478
+          }
+        },
+        "2024-2026": {
+          "total_return": -0.048356,
+          "annual_return": -0.02009,
+          "volatility": 0.157052,
+          "sharpe": -0.0528,
+          "max_drawdown": -0.188083,
+          "max_drawdown_duration_weeks": 88,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.369928,
+          "turnover": 33.4063,
+          "win_rate": 0.4409,
+          "closed_trades": 93,
+          "profit_loss_ratio": 1.122,
+          "yearly_returns": {
+            "2024": -0.035511,
+            "2025": -0.042781,
+            "2026": 0.030779
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_style_rotation",
+      "breadth20": 0.45,
+      "median_ret20": 0.0,
+      "vol_ceiling": 0.5,
+      "passes_20pct_all_windows": false,
+      "score": -0.2734823333333333,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.143605,
+          "annual_return": -0.022327,
+          "volatility": 0.163856,
+          "sharpe": -0.0563,
+          "max_drawdown": -0.331062,
+          "max_drawdown_duration_weeks": 349,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.072509,
+          "turnover": 125.4873,
+          "win_rate": 0.3817,
+          "closed_trades": 393,
+          "profit_loss_ratio": 1.479,
+          "yearly_returns": {
+            "2012": -0.110503,
+            "2013": -0.091212,
+            "2014": 0.101535,
+            "2015": 0.112375,
+            "2016": -0.141575,
+            "2017": 0.158264,
+            "2018": -0.111914
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.186014,
+          "annual_return": -0.041259,
+          "volatility": 0.170852,
+          "sharpe": -0.1625,
+          "max_drawdown": -0.423652,
+          "max_drawdown_duration_weeks": 115,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.643714,
+          "turnover": 105.0498,
+          "win_rate": 0.4242,
+          "closed_trades": 264,
+          "profit_loss_ratio": 1.192,
+          "yearly_returns": {
+            "2019": 0.146053,
+            "2020": 0.02351,
+            "2021": 0.005211,
+            "2022": -0.170321,
+            "2023": -0.173082
+          }
+        },
+        "2024-2026": {
+          "total_return": 0.47395,
+          "annual_return": 0.172155,
+          "volatility": 0.216311,
+          "sharpe": 0.8397,
+          "max_drawdown": -0.228032,
+          "max_drawdown_duration_weeks": 80,
+          "benchmark_total_return": 0.321572,
+          "excess_return": 0.152379,
+          "turnover": 47.8355,
+          "win_rate": 0.5038,
+          "closed_trades": 131,
+          "profit_loss_ratio": 1.828,
+          "yearly_returns": {
+            "2024": -0.076509,
+            "2025": 0.027218,
+            "2026": 0.553771
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_style_rotation",
+      "breadth20": 0.45,
+      "median_ret20": 0.0,
+      "vol_ceiling": 0.35,
+      "passes_20pct_all_windows": false,
+      "score": -0.2963024166666667,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.077809,
+          "annual_return": -0.011729,
+          "volatility": 0.095724,
+          "sharpe": -0.0763,
+          "max_drawdown": -0.254695,
+          "max_drawdown_duration_weeks": 349,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.006714,
+          "turnover": 82.2317,
+          "win_rate": 0.3828,
+          "closed_trades": 256,
+          "profit_loss_ratio": 1.471,
+          "yearly_returns": {
+            "2012": -0.048351,
+            "2013": -0.112823,
+            "2014": -0.00779,
+            "2015": -0.030025,
+            "2016": -0.000575,
+            "2017": 0.158824,
+            "2018": -0.019302
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.119438,
+          "annual_return": -0.025704,
+          "volatility": 0.102595,
+          "sharpe": -0.2022,
+          "max_drawdown": -0.245994,
+          "max_drawdown_duration_weeks": 163,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.577138,
+          "turnover": 51.9934,
+          "win_rate": 0.4604,
+          "closed_trades": 139,
+          "profit_loss_ratio": 0.968,
+          "yearly_returns": {
+            "2019": 0.085324,
+            "2020": -0.04878,
+            "2021": -0.03867,
+            "2022": 0.037019,
+            "2023": -0.174171
+          }
+        },
+        "2024-2026": {
+          "total_return": 0.057762,
+          "annual_return": 0.023259,
+          "volatility": 0.108174,
+          "sharpe": 0.2655,
+          "max_drawdown": -0.093178,
+          "max_drawdown_duration_weeks": 27,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.263809,
+          "turnover": 27.2458,
+          "win_rate": 0.4868,
+          "closed_trades": 76,
+          "profit_loss_ratio": 1.244,
+          "yearly_returns": {
+            "2024": 0.0,
+            "2025": -0.007603,
+            "2026": 0.065867
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_style_rotation",
+      "breadth20": 0.45,
+      "median_ret20": -0.01,
+      "vol_ceiling": 0.35,
+      "passes_20pct_all_windows": false,
+      "score": -0.42055200000000004,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.035466,
+          "annual_return": -0.005246,
+          "volatility": 0.097491,
+          "sharpe": -0.0062,
+          "max_drawdown": -0.249354,
+          "max_drawdown_duration_weeks": 302,
+          "benchmark_total_return": -0.071095,
+          "excess_return": 0.035629,
+          "turnover": 85.4104,
+          "win_rate": 0.3893,
+          "closed_trades": 262,
+          "profit_loss_ratio": 1.506,
+          "yearly_returns": {
+            "2012": -0.048351,
+            "2013": -0.10018,
+            "2014": -0.00379,
+            "2015": -0.030733,
+            "2016": -0.012298,
+            "2017": 0.168457,
+            "2018": 0.011546
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.177498,
+          "annual_return": -0.039214,
+          "volatility": 0.105727,
+          "sharpe": -0.325,
+          "max_drawdown": -0.263328,
+          "max_drawdown_duration_weeks": 202,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.635198,
+          "turnover": 50.551,
+          "win_rate": 0.4437,
+          "closed_trades": 142,
+          "profit_loss_ratio": 0.948,
+          "yearly_returns": {
+            "2019": 0.077411,
+            "2020": -0.100121,
+            "2021": -0.043981,
+            "2022": 0.03811,
+            "2023": -0.17514
+          }
+        },
+        "2024-2026": {
+          "total_return": 0.187619,
+          "annual_return": 0.072942,
+          "volatility": 0.126026,
+          "sharpe": 0.6202,
+          "max_drawdown": -0.093178,
+          "max_drawdown_duration_weeks": 27,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.133953,
+          "turnover": 28.9181,
+          "win_rate": 0.4744,
+          "closed_trades": 78,
+          "profit_loss_ratio": 1.717,
+          "yearly_returns": {
+            "2024": 0.0,
+            "2025": 0.043277,
+            "2026": 0.103318
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_style_rotation",
+      "breadth20": 0.65,
+      "median_ret20": -0.01,
+      "vol_ceiling": 0.35,
+      "passes_20pct_all_windows": false,
+      "score": -0.4463023333333333,
+      "metrics": {
+        "2012-2018": {
+          "total_return": 0.034037,
+          "annual_return": 0.004887,
+          "volatility": 0.092091,
+          "sharpe": 0.098,
+          "max_drawdown": -0.197768,
+          "max_drawdown_duration_weeks": 300,
+          "benchmark_total_return": -0.071095,
+          "excess_return": 0.105132,
+          "turnover": 72.1335,
+          "win_rate": 0.3879,
+          "closed_trades": 214,
+          "profit_loss_ratio": 1.65,
+          "yearly_returns": {
+            "2012": -0.029629,
+            "2013": -0.102153,
+            "2014": 0.036527,
+            "2015": -0.029032,
+            "2016": 0.013748,
+            "2017": 0.119306,
+            "2018": 0.040085
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.120021,
+          "annual_return": -0.025836,
+          "volatility": 0.068068,
+          "sharpe": -0.3494,
+          "max_drawdown": -0.144023,
+          "max_drawdown_duration_weeks": 252,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.577721,
+          "turnover": 21.4438,
+          "win_rate": 0.4154,
+          "closed_trades": 65,
+          "profit_loss_ratio": 0.843,
+          "yearly_returns": {
+            "2019": -0.037071,
+            "2020": -0.073294,
+            "2021": -0.003663,
+            "2022": 0.028834,
+            "2023": -0.069789
+          }
+        },
+        "2024-2026": {
+          "total_return": -0.072528,
+          "annual_return": -0.030358,
+          "volatility": 0.081082,
+          "sharpe": -0.3401,
+          "max_drawdown": -0.096385,
+          "max_drawdown_duration_weeks": 42,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.3941,
+          "turnover": 16.8788,
+          "win_rate": 0.3542,
+          "closed_trades": 48,
+          "profit_loss_ratio": 1.278,
+          "yearly_returns": {
+            "2024": 0.0,
+            "2025": -0.088421,
+            "2026": 0.017434
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_style_rotation",
+      "breadth20": 0.65,
+      "median_ret20": 0.0,
+      "vol_ceiling": 0.35,
+      "passes_20pct_all_windows": false,
+      "score": -0.4463023333333333,
+      "metrics": {
+        "2012-2018": {
+          "total_return": 0.034037,
+          "annual_return": 0.004887,
+          "volatility": 0.092091,
+          "sharpe": 0.098,
+          "max_drawdown": -0.197768,
+          "max_drawdown_duration_weeks": 300,
+          "benchmark_total_return": -0.071095,
+          "excess_return": 0.105132,
+          "turnover": 72.1335,
+          "win_rate": 0.3879,
+          "closed_trades": 214,
+          "profit_loss_ratio": 1.65,
+          "yearly_returns": {
+            "2012": -0.029629,
+            "2013": -0.102153,
+            "2014": 0.036527,
+            "2015": -0.029032,
+            "2016": 0.013748,
+            "2017": 0.119306,
+            "2018": 0.040085
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.120021,
+          "annual_return": -0.025836,
+          "volatility": 0.068068,
+          "sharpe": -0.3494,
+          "max_drawdown": -0.144023,
+          "max_drawdown_duration_weeks": 252,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.577721,
+          "turnover": 21.4438,
+          "win_rate": 0.4154,
+          "closed_trades": 65,
+          "profit_loss_ratio": 0.843,
+          "yearly_returns": {
+            "2019": -0.037071,
+            "2020": -0.073294,
+            "2021": -0.003663,
+            "2022": 0.028834,
+            "2023": -0.069789
+          }
+        },
+        "2024-2026": {
+          "total_return": -0.072528,
+          "annual_return": -0.030358,
+          "volatility": 0.081082,
+          "sharpe": -0.3401,
+          "max_drawdown": -0.096385,
+          "max_drawdown_duration_weeks": 42,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.3941,
+          "turnover": 16.8788,
+          "win_rate": 0.3542,
+          "closed_trades": 48,
+          "profit_loss_ratio": 1.278,
+          "yearly_returns": {
+            "2024": 0.0,
+            "2025": -0.088421,
+            "2026": 0.017434
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_style_rotation",
+      "breadth20": 0.65,
+      "median_ret20": 0.01,
+      "vol_ceiling": 0.35,
+      "passes_20pct_all_windows": false,
+      "score": -0.4463023333333333,
+      "metrics": {
+        "2012-2018": {
+          "total_return": 0.034037,
+          "annual_return": 0.004887,
+          "volatility": 0.092091,
+          "sharpe": 0.098,
+          "max_drawdown": -0.197768,
+          "max_drawdown_duration_weeks": 300,
+          "benchmark_total_return": -0.071095,
+          "excess_return": 0.105132,
+          "turnover": 72.1335,
+          "win_rate": 0.3879,
+          "closed_trades": 214,
+          "profit_loss_ratio": 1.65,
+          "yearly_returns": {
+            "2012": -0.029629,
+            "2013": -0.102153,
+            "2014": 0.036527,
+            "2015": -0.029032,
+            "2016": 0.013748,
+            "2017": 0.119306,
+            "2018": 0.040085
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.120021,
+          "annual_return": -0.025836,
+          "volatility": 0.068068,
+          "sharpe": -0.3494,
+          "max_drawdown": -0.144023,
+          "max_drawdown_duration_weeks": 252,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.577721,
+          "turnover": 21.4438,
+          "win_rate": 0.4154,
+          "closed_trades": 65,
+          "profit_loss_ratio": 0.843,
+          "yearly_returns": {
+            "2019": -0.037071,
+            "2020": -0.073294,
+            "2021": -0.003663,
+            "2022": 0.028834,
+            "2023": -0.069789
+          }
+        },
+        "2024-2026": {
+          "total_return": -0.072528,
+          "annual_return": -0.030358,
+          "volatility": 0.081082,
+          "sharpe": -0.3401,
+          "max_drawdown": -0.096385,
+          "max_drawdown_duration_weeks": 42,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.3941,
+          "turnover": 16.8788,
+          "win_rate": 0.3542,
+          "closed_trades": 48,
+          "profit_loss_ratio": 1.278,
+          "yearly_returns": {
+            "2024": 0.0,
+            "2025": -0.088421,
+            "2026": 0.017434
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_high_momentum_social",
+      "breadth20": 0.45,
+      "median_ret20": -0.01,
+      "vol_ceiling": 0.35,
+      "passes_20pct_all_windows": false,
+      "score": -0.6403282499999999,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.375117,
+          "annual_return": -0.066194,
+          "volatility": 0.127238,
+          "sharpe": -0.4739,
+          "max_drawdown": -0.444613,
+          "max_drawdown_duration_weeks": 266,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.304021,
+          "turnover": 98.6337,
+          "win_rate": 0.3585,
+          "closed_trades": 318,
+          "profit_loss_ratio": 1.381,
+          "yearly_returns": {
+            "2012": -0.031143,
+            "2013": 0.11192,
+            "2014": -0.077637,
+            "2015": -0.03604,
+            "2016": -0.143333,
+            "2017": -0.212173,
+            "2018": -0.032622
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.066355,
+          "annual_return": -0.013958,
+          "volatility": 0.148191,
+          "sharpe": -0.023,
+          "max_drawdown": -0.363708,
+          "max_drawdown_duration_weeks": 163,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.524055,
+          "turnover": 77.1774,
+          "win_rate": 0.3869,
+          "closed_trades": 199,
+          "profit_loss_ratio": 1.501,
+          "yearly_returns": {
+            "2019": 0.051079,
+            "2020": 0.00288,
+            "2021": -0.061961,
+            "2022": -0.021907,
+            "2023": -0.081993
+          }
+        },
+        "2024-2026": {
+          "total_return": 0.298581,
+          "annual_return": 0.112909,
+          "volatility": 0.20742,
+          "sharpe": 0.6181,
+          "max_drawdown": -0.188862,
+          "max_drawdown_duration_weeks": 24,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.02299,
+          "turnover": 45.9762,
+          "win_rate": 0.4435,
+          "closed_trades": 115,
+          "profit_loss_ratio": 1.634,
+          "yearly_returns": {
+            "2024": 0.0,
+            "2025": 0.338659,
+            "2026": -0.065809
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_high_momentum_social",
+      "breadth20": 0.45,
+      "median_ret20": 0.01,
+      "vol_ceiling": 0.5,
+      "passes_20pct_all_windows": false,
+      "score": -0.8086509166666666,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.562305,
+          "annual_return": -0.113388,
+          "volatility": 0.2117,
+          "sharpe": -0.4614,
+          "max_drawdown": -0.692341,
+          "max_drawdown_duration_weeks": 189,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.49121,
+          "turnover": 153.6908,
+          "win_rate": 0.3753,
+          "closed_trades": 461,
+          "profit_loss_ratio": 1.335,
+          "yearly_returns": {
+            "2012": -0.003085,
+            "2013": 0.145918,
+            "2014": 0.078082,
+            "2015": 0.067032,
+            "2016": -0.496609,
+            "2017": -0.261553,
+            "2018": -0.062272
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.348616,
+          "annual_return": -0.084016,
+          "volatility": 0.169039,
+          "sharpe": -0.4354,
+          "max_drawdown": -0.481657,
+          "max_drawdown_duration_weeks": 170,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.806316,
+          "turnover": 97.6327,
+          "win_rate": 0.3836,
+          "closed_trades": 318,
+          "profit_loss_ratio": 1.295,
+          "yearly_returns": {
+            "2019": -0.18259,
+            "2020": 0.064138,
+            "2021": -0.105863,
+            "2022": -0.17682,
+            "2023": -0.028324
+          }
+        },
+        "2024-2026": {
+          "total_return": 0.037209,
+          "annual_return": 0.015071,
+          "volatility": 0.286257,
+          "sharpe": 0.1981,
+          "max_drawdown": -0.469094,
+          "max_drawdown_duration_weeks": 88,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.284363,
+          "turnover": 52.2597,
+          "win_rate": 0.4269,
+          "closed_trades": 171,
+          "profit_loss_ratio": 1.383,
+          "yearly_returns": {
+            "2024": -0.330371,
+            "2025": 0.474519,
+            "2026": 0.050464
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_high_momentum_social",
+      "breadth20": 0.55,
+      "median_ret20": 0.01,
+      "vol_ceiling": 0.5,
+      "passes_20pct_all_windows": false,
+      "score": -0.8103930833333333,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.559331,
+          "annual_return": -0.112513,
+          "volatility": 0.211464,
+          "sharpe": -0.4576,
+          "max_drawdown": -0.695111,
+          "max_drawdown_duration_weeks": 189,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.488235,
+          "turnover": 152.471,
+          "win_rate": 0.3755,
+          "closed_trades": 458,
+          "profit_loss_ratio": 1.334,
+          "yearly_returns": {
+            "2012": -0.003085,
+            "2013": 0.145918,
+            "2014": 0.08984,
+            "2015": 0.063365,
+            "2016": -0.500113,
+            "2017": -0.260871,
+            "2018": -0.05923
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.348616,
+          "annual_return": -0.084016,
+          "volatility": 0.169039,
+          "sharpe": -0.4354,
+          "max_drawdown": -0.481657,
+          "max_drawdown_duration_weeks": 170,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.806316,
+          "turnover": 97.6327,
+          "win_rate": 0.3836,
+          "closed_trades": 318,
+          "profit_loss_ratio": 1.295,
+          "yearly_returns": {
+            "2019": -0.18259,
+            "2020": 0.064138,
+            "2021": -0.105863,
+            "2022": -0.17682,
+            "2023": -0.028324
+          }
+        },
+        "2024-2026": {
+          "total_return": -0.007258,
+          "annual_return": -0.002978,
+          "volatility": 0.284832,
+          "sharpe": 0.1347,
+          "max_drawdown": -0.469094,
+          "max_drawdown_duration_weeks": 88,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.32883,
+          "turnover": 50.9827,
+          "win_rate": 0.4132,
+          "closed_trades": 167,
+          "profit_loss_ratio": 1.412,
+          "yearly_returns": {
+            "2024": -0.330371,
+            "2025": 0.474519,
+            "2026": 0.005429
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_high_momentum_social",
+      "breadth20": 0.55,
+      "median_ret20": -0.01,
+      "vol_ceiling": 0.5,
+      "passes_20pct_all_windows": false,
+      "score": -0.8113954166666666,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.559413,
+          "annual_return": -0.112537,
+          "volatility": 0.211218,
+          "sharpe": -0.4585,
+          "max_drawdown": -0.695171,
+          "max_drawdown_duration_weeks": 189,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.488317,
+          "turnover": 153.6733,
+          "win_rate": 0.3777,
+          "closed_trades": 466,
+          "profit_loss_ratio": 1.323,
+          "yearly_returns": {
+            "2012": -0.003085,
+            "2013": 0.145918,
+            "2014": 0.08984,
+            "2015": 0.063365,
+            "2016": -0.500113,
+            "2017": -0.253701,
+            "2018": -0.068443
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.348616,
+          "annual_return": -0.084016,
+          "volatility": 0.169039,
+          "sharpe": -0.4354,
+          "max_drawdown": -0.481657,
+          "max_drawdown_duration_weeks": 170,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.806316,
+          "turnover": 97.6327,
+          "win_rate": 0.3836,
+          "closed_trades": 318,
+          "profit_loss_ratio": 1.295,
+          "yearly_returns": {
+            "2019": -0.18259,
+            "2020": 0.064138,
+            "2021": -0.105863,
+            "2022": -0.17682,
+            "2023": -0.028324
+          }
+        },
+        "2024-2026": {
+          "total_return": -0.007661,
+          "annual_return": -0.003144,
+          "volatility": 0.284898,
+          "sharpe": 0.1341,
+          "max_drawdown": -0.469094,
+          "max_drawdown_duration_weeks": 88,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.329233,
+          "turnover": 51.7071,
+          "win_rate": 0.4118,
+          "closed_trades": 170,
+          "profit_loss_ratio": 1.42,
+          "yearly_returns": {
+            "2024": -0.330371,
+            "2025": 0.473916,
+            "2026": 0.005431
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_high_momentum_social",
+      "breadth20": 0.55,
+      "median_ret20": 0.0,
+      "vol_ceiling": 0.5,
+      "passes_20pct_all_windows": false,
+      "score": -0.8113954166666666,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.559413,
+          "annual_return": -0.112537,
+          "volatility": 0.211218,
+          "sharpe": -0.4585,
+          "max_drawdown": -0.695171,
+          "max_drawdown_duration_weeks": 189,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.488317,
+          "turnover": 153.6733,
+          "win_rate": 0.3777,
+          "closed_trades": 466,
+          "profit_loss_ratio": 1.323,
+          "yearly_returns": {
+            "2012": -0.003085,
+            "2013": 0.145918,
+            "2014": 0.08984,
+            "2015": 0.063365,
+            "2016": -0.500113,
+            "2017": -0.253701,
+            "2018": -0.068443
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.348616,
+          "annual_return": -0.084016,
+          "volatility": 0.169039,
+          "sharpe": -0.4354,
+          "max_drawdown": -0.481657,
+          "max_drawdown_duration_weeks": 170,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.806316,
+          "turnover": 97.6327,
+          "win_rate": 0.3836,
+          "closed_trades": 318,
+          "profit_loss_ratio": 1.295,
+          "yearly_returns": {
+            "2019": -0.18259,
+            "2020": 0.064138,
+            "2021": -0.105863,
+            "2022": -0.17682,
+            "2023": -0.028324
+          }
+        },
+        "2024-2026": {
+          "total_return": -0.007661,
+          "annual_return": -0.003144,
+          "volatility": 0.284898,
+          "sharpe": 0.1341,
+          "max_drawdown": -0.469094,
+          "max_drawdown_duration_weeks": 88,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.329233,
+          "turnover": 51.7071,
+          "win_rate": 0.4118,
+          "closed_trades": 170,
+          "profit_loss_ratio": 1.42,
+          "yearly_returns": {
+            "2024": -0.330371,
+            "2025": 0.473916,
+            "2026": 0.005431
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_high_momentum_social",
+      "breadth20": 0.45,
+      "median_ret20": 0.0,
+      "vol_ceiling": 0.35,
+      "passes_20pct_all_windows": false,
+      "score": -0.8480993333333333,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.456229,
+          "annual_return": -0.084916,
+          "volatility": 0.127163,
+          "sharpe": -0.6331,
+          "max_drawdown": -0.497384,
+          "max_drawdown_duration_weeks": 266,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.385134,
+          "turnover": 91.8585,
+          "win_rate": 0.3377,
+          "closed_trades": 305,
+          "profit_loss_ratio": 1.403,
+          "yearly_returns": {
+            "2012": -0.031143,
+            "2013": 0.093801,
+            "2014": -0.089417,
+            "2015": -0.037169,
+            "2016": -0.179448,
+            "2017": -0.242048,
+            "2018": -0.058252
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.003709,
+          "annual_return": -0.00076,
+          "volatility": 0.143394,
+          "sharpe": 0.0641,
+          "max_drawdown": -0.387323,
+          "max_drawdown_duration_weeks": 163,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.461409,
+          "turnover": 80.3281,
+          "win_rate": 0.4051,
+          "closed_trades": 195,
+          "profit_loss_ratio": 1.464,
+          "yearly_returns": {
+            "2019": 0.094457,
+            "2020": 0.077488,
+            "2021": -0.083108,
+            "2022": -0.023759,
+            "2023": -0.101617
+          }
+        },
+        "2024-2026": {
+          "total_return": 0.175547,
+          "annual_return": 0.068464,
+          "volatility": 0.208937,
+          "sharpe": 0.4193,
+          "max_drawdown": -0.188862,
+          "max_drawdown_duration_weeks": 24,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.146024,
+          "turnover": 41.522,
+          "win_rate": 0.4299,
+          "closed_trades": 107,
+          "profit_loss_ratio": 1.572,
+          "yearly_returns": {
+            "2024": 0.0,
+            "2025": 0.355694,
+            "2026": -0.132881
+          }
+        }
+      }
+    },
+    {
+      "preset_id": "low_vol_high_momentum_social",
+      "breadth20": 0.65,
+      "median_ret20": -0.01,
+      "vol_ceiling": 0.5,
+      "passes_20pct_all_windows": false,
+      "score": -0.8977089999999999,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.559568,
+          "annual_return": -0.112582,
+          "volatility": 0.191027,
+          "sharpe": -0.5315,
+          "max_drawdown": -0.64132,
+          "max_drawdown_duration_weeks": 348,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.488472,
+          "turnover": 111.5805,
+          "win_rate": 0.3623,
+          "closed_trades": 403,
+          "profit_loss_ratio": 1.296,
+          "yearly_returns": {
+            "2012": -0.043763,
+            "2013": -0.049595,
+            "2014": 0.042053,
+            "2015": 0.036387,
+            "2016": -0.384269,
+            "2017": -0.276407,
+            "2018": 0.047253
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.278184,
+          "annual_return": -0.064559,
+          "volatility": 0.119599,
+          "sharpe": -0.4987,
+          "max_drawdown": -0.349936,
+          "max_drawdown_duration_weeks": 248,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.735884,
+          "turnover": 58.6419,
+          "win_rate": 0.3649,
+          "closed_trades": 211,
+          "profit_loss_ratio": 1.271,
+          "yearly_returns": {
+            "2019": -0.280453,
+            "2020": 0.109982,
+            "2021": -0.115393,
+            "2022": -0.044953,
+            "2023": 0.019076
+          }
+        },
+        "2024-2026": {
+          "total_return": -0.232639,
+          "annual_return": -0.10275,
+          "volatility": 0.247077,
+          "sharpe": -0.3104,
+          "max_drawdown": -0.426916,
+          "max_drawdown_duration_weeks": 88,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.554211,
+          "turnover": 41.5032,
+          "win_rate": 0.3676,
+          "closed_trades": 136,
+          "profit_loss_ratio": 1.372,
+          "yearly_returns": {
+            "2024": -0.313666,
+            "2025": 0.255824,
+            "2026": -0.109702
+          }
+        }
+      }
+    }
+  ],
+  "passing": []
+}
