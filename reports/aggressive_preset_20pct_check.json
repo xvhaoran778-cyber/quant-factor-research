@@ -1,0 +1,581 @@
+{
+  "generated_at": "2026-07-07T13:26:41",
+  "target": "annual_return >= 20% in every validation window",
+  "windows": {
+    "2012-2018": [
+      "2012-01-01",
+      "2018-12-31"
+    ],
+    "2019-2023": [
+      "2019-01-01",
+      "2023-12-31"
+    ],
+    "2024-2026": [
+      "2024-01-01",
+      "2026-07-05"
+    ]
+  },
+  "rows": [
+    {
+      "id": "low_price_breakout_proxy",
+      "name": "低价窄幅突破代理",
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.866183,
+          "annual_return": -0.253948,
+          "volatility": 0.266652,
+          "sharpe": -0.9601,
+          "max_drawdown": -0.87274,
+          "max_drawdown_duration_weeks": 347,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.795088,
+          "turnover": 258.4225,
+          "win_rate": 0.4179,
+          "closed_trades": 1194,
+          "profit_loss_ratio": 1.104,
+          "yearly_returns": {
+            "2012": -0.202489,
+            "2013": -0.014426,
+            "2014": -0.126687,
+            "2015": -0.085212,
+            "2016": -0.456174,
+            "2017": -0.271099,
+            "2018": -0.429032
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.806441,
+          "annual_return": -0.285515,
+          "volatility": 0.325034,
+          "sharpe": -0.871,
+          "max_drawdown": -0.843967,
+          "max_drawdown_duration_weeks": 241,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -1.264142,
+          "turnover": 165.2614,
+          "win_rate": 0.3593,
+          "closed_trades": 860,
+          "profit_loss_ratio": 1.352,
+          "yearly_returns": {
+            "2019": -0.362332,
+            "2020": -0.284786,
+            "2021": 0.070005,
+            "2022": -0.47797,
+            "2023": -0.276015
+          }
+        },
+        "2024-2026": {
+          "total_return": -0.482901,
+          "annual_return": -0.236651,
+          "volatility": 0.379454,
+          "sharpe": -0.5222,
+          "max_drawdown": -0.660987,
+          "max_drawdown_duration_weeks": 88,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.804473,
+          "turnover": 117.7063,
+          "win_rate": 0.39,
+          "closed_trades": 482,
+          "profit_loss_ratio": 1.232,
+          "yearly_returns": {
+            "2024": -0.18815,
+            "2025": -0.486731,
+            "2026": 0.276304
+          }
+        }
+      },
+      "passes_20pct_all_windows": false
+    },
+    {
+      "id": "limit_up_continuation_proxy",
+      "name": "首板延续代理",
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.976894,
+          "annual_return": -0.422353,
+          "volatility": 0.366313,
+          "sharpe": -1.301,
+          "max_drawdown": -0.982025,
+          "max_drawdown_duration_weeks": 347,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.905799,
+          "turnover": 149.6723,
+          "win_rate": 0.3817,
+          "closed_trades": 634,
+          "profit_loss_ratio": 1.119,
+          "yearly_returns": {
+            "2012": -0.139455,
+            "2013": -0.620588,
+            "2014": -0.183498,
+            "2015": -0.467266,
+            "2016": -0.561638,
+            "2017": -0.353356,
+            "2018": -0.465135
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.987098,
+          "annual_return": -0.589599,
+          "volatility": 0.419903,
+          "sharpe": -1.8925,
+          "max_drawdown": -0.987098,
+          "max_drawdown_duration_weeks": 253,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -1.444798,
+          "turnover": 37.2039,
+          "win_rate": 0.2598,
+          "closed_trades": 281,
+          "profit_loss_ratio": 1.161,
+          "yearly_returns": {
+            "2019": -0.789302,
+            "2020": -0.756648,
+            "2021": -0.610108,
+            "2022": -0.138223,
+            "2023": -0.105472
+          }
+        },
+        "2024-2026": {
+          "total_return": -0.961733,
+          "annual_return": -0.737131,
+          "volatility": 0.532763,
+          "sharpe": -2.1945,
+          "max_drawdown": -0.968355,
+          "max_drawdown_duration_weeks": 124,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -1.283305,
+          "turnover": 23.9576,
+          "win_rate": 0.3128,
+          "closed_trades": 195,
+          "profit_loss_ratio": 0.496,
+          "yearly_returns": {
+            "2024": -0.866536,
+            "2025": -0.693039,
+            "2026": 0.037049
+          }
+        }
+      },
+      "passes_20pct_all_windows": false
+    },
+    {
+      "id": "small_cap_reversal_guarded",
+      "name": "小盘超跌反转代理",
+      "metrics": {
+        "2012-2018": {
+          "total_return": 0.690371,
+          "annual_return": 0.079462,
+          "volatility": 0.27505,
+          "sharpe": 0.4177,
+          "max_drawdown": -0.63855,
+          "max_drawdown_duration_weeks": 180,
+          "benchmark_total_return": -0.071095,
+          "excess_return": 0.761467,
+          "turnover": 986.7937,
+          "win_rate": 0.5283,
+          "closed_trades": 988,
+          "profit_loss_ratio": 0.945,
+          "yearly_returns": {
+            "2012": 0.023792,
+            "2013": 0.474562,
+            "2014": 0.624663,
+            "2015": 0.239241,
+            "2016": -0.171324,
+            "2017": -0.004973,
+            "2018": -0.341048
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.343997,
+          "annual_return": -0.08269,
+          "volatility": 0.217873,
+          "sharpe": -0.2868,
+          "max_drawdown": -0.512212,
+          "max_drawdown_duration_weeks": 241,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.801698,
+          "turnover": 288.0739,
+          "win_rate": 0.4391,
+          "closed_trades": 722,
+          "profit_loss_ratio": 1.14,
+          "yearly_returns": {
+            "2019": -0.153006,
+            "2020": 0.14983,
+            "2021": -0.36449,
+            "2022": -0.023355,
+            "2023": -0.016331
+          }
+        },
+        "2024-2026": {
+          "total_return": -0.088981,
+          "annual_return": -0.037438,
+          "volatility": 0.341877,
+          "sharpe": 0.0586,
+          "max_drawdown": -0.327554,
+          "max_drawdown_duration_weeks": 42,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.410552,
+          "turnover": 196.3077,
+          "win_rate": 0.4701,
+          "closed_trades": 402,
+          "profit_loss_ratio": 1.087,
+          "yearly_returns": {
+            "2024": 0.070815,
+            "2025": 0.243361,
+            "2026": -0.1914
+          }
+        }
+      },
+      "passes_20pct_all_windows": false
+    },
+    {
+      "id": "social_small_cap_quality_momentum",
+      "name": "社媒小市值质量动量代理",
+      "metrics": {
+        "2012-2018": {
+          "total_return": 0.972422,
+          "annual_return": 0.104,
+          "volatility": 0.490917,
+          "sharpe": 0.3771,
+          "max_drawdown": -0.598296,
+          "max_drawdown_duration_weeks": 152,
+          "benchmark_total_return": -0.071095,
+          "excess_return": 1.043517,
+          "turnover": 637.3498,
+          "win_rate": 0.445,
+          "closed_trades": 636,
+          "profit_loss_ratio": 1.371,
+          "yearly_returns": {
+            "2012": -0.189096,
+            "2013": 0.436086,
+            "2014": 0.572,
+            "2015": 1.527691,
+            "2016": -0.088915,
+            "2017": -0.181085,
+            "2018": -0.404401
+          }
+        },
+        "2019-2023": {
+          "total_return": 0.133514,
+          "annual_return": 0.025989,
+          "volatility": 0.265801,
+          "sharpe": 0.2216,
+          "max_drawdown": -0.398067,
+          "max_drawdown_duration_weeks": 117,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.324186,
+          "turnover": 279.7318,
+          "win_rate": 0.4216,
+          "closed_trades": 536,
+          "profit_loss_ratio": 1.425,
+          "yearly_returns": {
+            "2019": -0.107527,
+            "2020": 0.209316,
+            "2021": 0.039134,
+            "2022": -0.244794,
+            "2023": 0.11106
+          }
+        },
+        "2024-2026": {
+          "total_return": -0.402705,
+          "annual_return": -0.190232,
+          "volatility": 0.255845,
+          "sharpe": -0.6959,
+          "max_drawdown": -0.432899,
+          "max_drawdown_duration_weeks": 113,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.724276,
+          "turnover": 105.9974,
+          "win_rate": 0.3874,
+          "closed_trades": 302,
+          "profit_loss_ratio": 1.187,
+          "yearly_returns": {
+            "2024": -0.217886,
+            "2025": -0.121,
+            "2026": -0.119215
+          }
+        }
+      },
+      "passes_20pct_all_windows": false
+    },
+    {
+      "id": "low_vol_high_momentum_social",
+      "name": "低波高动量社媒版",
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.71389,
+          "annual_return": -0.166627,
+          "volatility": 0.278462,
+          "sharpe": -0.5143,
+          "max_drawdown": -0.821329,
+          "max_drawdown_duration_weeks": 180,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.642795,
+          "turnover": 220.9177,
+          "win_rate": 0.3789,
+          "closed_trades": 871,
+          "profit_loss_ratio": 1.377,
+          "yearly_returns": {
+            "2012": -0.172292,
+            "2013": 0.06245,
+            "2014": 0.258788,
+            "2015": -0.183066,
+            "2016": -0.49514,
+            "2017": -0.22255,
+            "2018": -0.09141
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.706179,
+          "annual_return": -0.221778,
+          "volatility": 0.271881,
+          "sharpe": -0.7848,
+          "max_drawdown": -0.776356,
+          "max_drawdown_duration_weeks": 247,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -1.16388,
+          "turnover": 117.6781,
+          "win_rate": 0.3803,
+          "closed_trades": 589,
+          "profit_loss_ratio": 1.166,
+          "yearly_returns": {
+            "2019": -0.397584,
+            "2020": 0.025115,
+            "2021": -0.177651,
+            "2022": -0.442323,
+            "2023": 0.046954
+          }
+        },
+        "2024-2026": {
+          "total_return": 0.724187,
+          "annual_return": 0.249882,
+          "volatility": 0.388561,
+          "sharpe": 0.7669,
+          "max_drawdown": -0.505392,
+          "max_drawdown_duration_weeks": 46,
+          "benchmark_total_return": 0.321572,
+          "excess_return": 0.402615,
+          "turnover": 125.2672,
+          "win_rate": 0.4601,
+          "closed_trades": 326,
+          "profit_loss_ratio": 1.397,
+          "yearly_returns": {
+            "2024": -0.124824,
+            "2025": 0.510143,
+            "2026": 0.443429
+          }
+        }
+      },
+      "passes_20pct_all_windows": false
+    },
+    {
+      "id": "small_large_style_rotation",
+      "name": "小盘/大盘风格轮动代理",
+      "metrics": {
+        "2012-2018": {
+          "total_return": 1.297769,
+          "annual_return": 0.128827,
+          "volatility": 0.484715,
+          "sharpe": 0.4255,
+          "max_drawdown": -0.570172,
+          "max_drawdown_duration_weeks": 154,
+          "benchmark_total_return": -0.071095,
+          "excess_return": 1.368865,
+          "turnover": 779.5376,
+          "win_rate": 0.478,
+          "closed_trades": 728,
+          "profit_loss_ratio": 1.212,
+          "yearly_returns": {
+            "2012": -0.13238,
+            "2013": 0.328279,
+            "2014": 1.009787,
+            "2015": 1.100769,
+            "2016": -0.134875,
+            "2017": -0.055206,
+            "2018": -0.398709
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.429246,
+          "annual_return": -0.108464,
+          "volatility": 0.284549,
+          "sharpe": -0.2677,
+          "max_drawdown": -0.576679,
+          "max_drawdown_duration_weeks": 240,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.886947,
+          "turnover": 237.6803,
+          "win_rate": 0.3836,
+          "closed_trades": 597,
+          "profit_loss_ratio": 1.414,
+          "yearly_returns": {
+            "2019": -0.091368,
+            "2020": 0.038287,
+            "2021": -0.183712,
+            "2022": -0.308888,
+            "2023": 0.022606
+          }
+        },
+        "2024-2026": {
+          "total_return": -0.264705,
+          "annual_return": -0.118296,
+          "volatility": 0.31507,
+          "sharpe": -0.2414,
+          "max_drawdown": -0.31231,
+          "max_drawdown_duration_weeks": 112,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.586277,
+          "turnover": 140.9482,
+          "win_rate": 0.4174,
+          "closed_trades": 345,
+          "profit_loss_ratio": 1.202,
+          "yearly_returns": {
+            "2024": -0.162904,
+            "2025": 0.007569,
+            "2026": -0.09408
+          }
+        }
+      },
+      "passes_20pct_all_windows": false
+    },
+    {
+      "id": "breakout_acceleration",
+      "name": "放量突破加速",
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.963031,
+          "annual_return": -0.381423,
+          "volatility": 0.38151,
+          "sharpe": -1.064,
+          "max_drawdown": -0.96996,
+          "max_drawdown_duration_weeks": 348,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.891935,
+          "turnover": 138.1917,
+          "win_rate": 0.3148,
+          "closed_trades": 486,
+          "profit_loss_ratio": 1.604,
+          "yearly_returns": {
+            "2012": -0.231457,
+            "2013": -0.373395,
+            "2014": 0.019812,
+            "2015": 0.054121,
+            "2016": -0.670094,
+            "2017": -0.657102,
+            "2018": -0.376715
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.98464,
+          "annual_return": -0.574688,
+          "volatility": 0.410937,
+          "sharpe": -1.8529,
+          "max_drawdown": -0.98464,
+          "max_drawdown_duration_weeks": 253,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -1.442341,
+          "turnover": 31.0148,
+          "win_rate": 0.3058,
+          "closed_trades": 242,
+          "profit_loss_ratio": 0.688,
+          "yearly_returns": {
+            "2019": -0.833511,
+            "2020": -0.62853,
+            "2021": -0.349367,
+            "2022": -0.510886,
+            "2023": -0.17642
+          }
+        },
+        "2024-2026": {
+          "total_return": -0.923368,
+          "annual_return": -0.650679,
+          "volatility": 0.62966,
+          "sharpe": -1.335,
+          "max_drawdown": -0.923368,
+          "max_drawdown_duration_weeks": 124,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -1.244939,
+          "turnover": 40.9791,
+          "win_rate": 0.3061,
+          "closed_trades": 196,
+          "profit_loss_ratio": 1.231,
+          "yearly_returns": {
+            "2024": -0.545351,
+            "2025": -0.763508,
+            "2026": -0.195385
+          }
+        }
+      },
+      "passes_20pct_all_windows": false
+    },
+    {
+      "id": "oversold_rebound_aggressive",
+      "name": "极限超跌反弹",
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.419775,
+          "annual_return": -0.076226,
+          "volatility": 0.239576,
+          "sharpe": -0.2119,
+          "max_drawdown": -0.588727,
+          "max_drawdown_duration_weeks": 180,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.34868,
+          "turnover": 331.121,
+          "win_rate": 0.4977,
+          "closed_trades": 645,
+          "profit_loss_ratio": 0.9,
+          "yearly_returns": {
+            "2012": -0.010513,
+            "2013": -0.17496,
+            "2014": 0.122849,
+            "2015": 0.286974,
+            "2016": -0.389396,
+            "2017": -0.058723,
+            "2018": -0.048222
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.044325,
+          "annual_return": -0.009239,
+          "volatility": 0.272557,
+          "sharpe": 0.0993,
+          "max_drawdown": -0.579492,
+          "max_drawdown_duration_weeks": 168,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.502026,
+          "turnover": 363.4975,
+          "win_rate": 0.4895,
+          "closed_trades": 523,
+          "profit_loss_ratio": 1.031,
+          "yearly_returns": {
+            "2019": 0.181755,
+            "2020": 0.124727,
+            "2021": -0.421786,
+            "2022": -0.136859,
+            "2023": 0.28519
+          }
+        },
+        "2024-2026": {
+          "total_return": 0.106144,
+          "annual_return": 0.04217,
+          "volatility": 0.340061,
+          "sharpe": 0.2771,
+          "max_drawdown": -0.300758,
+          "max_drawdown_duration_weeks": 79,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.215428,
+          "turnover": 243.3464,
+          "win_rate": 0.4456,
+          "closed_trades": 294,
+          "profit_loss_ratio": 1.296,
+          "yearly_returns": {
+            "2024": 0.459164,
+            "2025": -0.023917,
+            "2026": -0.1135
+          }
+        }
+      },
+      "passes_20pct_all_windows": false
+    }
+  ],
+  "passing": []
+}
