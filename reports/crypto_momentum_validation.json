@@ -1,0 +1,247 @@
+{
+  "generated_at": "2026-07-07T16:06:46",
+  "data_source": "https://www.cryptodatadownload.com/cdd",
+  "note": "Binance daily CSV begins in 2017, so 2014-2018 is partial/not comparable for that source.",
+  "rows": [
+    {
+      "name": "bitstamp_base_60d_5pct",
+      "source": "bitstamp",
+      "lookback_days": 60,
+      "threshold": 0.05,
+      "risk_control": "none",
+      "metrics": {
+        "2014-2018": {
+          "total_return": 10.339466,
+          "annual_return": 0.809155,
+          "sharpe": 1.2413,
+          "max_drawdown": -0.672195
+        },
+        "2019-2023": {
+          "total_return": 9.980098,
+          "annual_return": 0.614386,
+          "sharpe": 1.0623,
+          "max_drawdown": -0.673367
+        },
+        "2024-2026": {
+          "total_return": 1.024738,
+          "annual_return": 0.324583,
+          "sharpe": 0.8936,
+          "max_drawdown": -0.341711
+        }
+      },
+      "passes_20pct_all_windows": true,
+      "min_annual_return": 0.324583,
+      "max_drawdown": -0.673367
+    },
+    {
+      "name": "bitstamp_vol_target_35%",
+      "source": "bitstamp",
+      "lookback_days": 60,
+      "threshold": 0.05,
+      "risk_control": "30d volatility target 35%, no leverage above 1x",
+      "metrics": {
+        "2014-2018": {
+          "total_return": 2.997572,
+          "annual_return": 0.402577,
+          "sharpe": 1.1778,
+          "max_drawdown": -0.444172
+        },
+        "2019-2023": {
+          "total_return": 7.39678,
+          "annual_return": 0.530105,
+          "sharpe": 1.3758,
+          "max_drawdown": -0.469826
+        },
+        "2024-2026": {
+          "total_return": 0.66728,
+          "annual_return": 0.225925,
+          "sharpe": 0.8367,
+          "max_drawdown": -0.31025
+        }
+      },
+      "passes_20pct_all_windows": true,
+      "min_annual_return": 0.225925,
+      "max_drawdown": -0.469826
+    },
+    {
+      "name": "bitstamp_vol_target_50%",
+      "source": "bitstamp",
+      "lookback_days": 60,
+      "threshold": 0.05,
+      "risk_control": "30d volatility target 50%, no leverage above 1x",
+      "metrics": {
+        "2014-2018": {
+          "total_return": 4.029672,
+          "annual_return": 0.483471,
+          "sharpe": 1.1397,
+          "max_drawdown": -0.498707
+        },
+        "2019-2023": {
+          "total_return": 13.045653,
+          "annual_return": 0.695831,
+          "sharpe": 1.3906,
+          "max_drawdown": -0.521859
+        },
+        "2024-2026": {
+          "total_return": 0.830969,
+          "annual_return": 0.272538,
+          "sharpe": 0.8429,
+          "max_drawdown": -0.337856
+        }
+      },
+      "passes_20pct_all_windows": true,
+      "min_annual_return": 0.272538,
+      "max_drawdown": -0.521859
+    },
+    {
+      "name": "bitstamp_vol_target_70%",
+      "source": "bitstamp",
+      "lookback_days": 60,
+      "threshold": 0.05,
+      "risk_control": "30d volatility target 70%, no leverage above 1x",
+      "metrics": {
+        "2014-2018": {
+          "total_return": 5.706181,
+          "annual_return": 0.591408,
+          "sharpe": 1.157,
+          "max_drawdown": -0.549035
+        },
+        "2019-2023": {
+          "total_return": 16.8822,
+          "annual_return": 0.779701,
+          "sharpe": 1.3181,
+          "max_drawdown": -0.562171
+        },
+        "2024-2026": {
+          "total_return": 1.06211,
+          "annual_return": 0.334272,
+          "sharpe": 0.9176,
+          "max_drawdown": -0.341954
+        }
+      },
+      "passes_20pct_all_windows": true,
+      "min_annual_return": 0.334272,
+      "max_drawdown": -0.562171
+    },
+    {
+      "name": "binance_base_60d_5pct",
+      "source": "binance",
+      "lookback_days": 60,
+      "threshold": 0.05,
+      "risk_control": "none",
+      "metrics": {
+        "2014-2018": {
+          "total_return": 0.27055,
+          "annual_return": 0.190177,
+          "sharpe": 0.6039,
+          "max_drawdown": -0.696122
+        },
+        "2019-2023": {
+          "total_return": 10.147942,
+          "annual_return": 0.619289,
+          "sharpe": 1.0706,
+          "max_drawdown": -0.677196
+        },
+        "2024-2026": {
+          "total_return": 0.9746,
+          "annual_return": 0.320193,
+          "sharpe": 0.8844,
+          "max_drawdown": -0.339783
+        }
+      },
+      "passes_20pct_all_windows": false,
+      "min_annual_return": 0.190177,
+      "max_drawdown": -0.696122
+    },
+    {
+      "name": "binance_vol_target_35%",
+      "source": "binance",
+      "lookback_days": 60,
+      "threshold": 0.05,
+      "risk_control": "30d volatility target 35%, no leverage above 1x",
+      "metrics": {
+        "2014-2018": {
+          "total_return": -0.092705,
+          "annual_return": -0.068293,
+          "sharpe": -0.0728,
+          "max_drawdown": -0.490237
+        },
+        "2019-2023": {
+          "total_return": 7.980206,
+          "annual_return": 0.550789,
+          "sharpe": 1.4167,
+          "max_drawdown": -0.470718
+        },
+        "2024-2026": {
+          "total_return": 0.617221,
+          "annual_return": 0.216846,
+          "sharpe": 0.8103,
+          "max_drawdown": -0.308684
+        }
+      },
+      "passes_20pct_all_windows": false,
+      "min_annual_return": -0.068293,
+      "max_drawdown": -0.490237
+    },
+    {
+      "name": "binance_vol_target_50%",
+      "source": "binance",
+      "lookback_days": 60,
+      "threshold": 0.05,
+      "risk_control": "30d volatility target 50%, no leverage above 1x",
+      "metrics": {
+        "2014-2018": {
+          "total_return": 0.018729,
+          "annual_return": 0.013583,
+          "sharpe": 0.2299,
+          "max_drawdown": -0.541056
+        },
+        "2019-2023": {
+          "total_return": 13.884851,
+          "annual_return": 0.715617,
+          "sharpe": 1.4179,
+          "max_drawdown": -0.52184
+        },
+        "2024-2026": {
+          "total_return": 0.78802,
+          "annual_return": 0.267763,
+          "sharpe": 0.8317,
+          "max_drawdown": -0.336007
+        }
+      },
+      "passes_20pct_all_windows": false,
+      "min_annual_return": 0.013583,
+      "max_drawdown": -0.541056
+    },
+    {
+      "name": "binance_vol_target_70%",
+      "source": "binance",
+      "lookback_days": 60,
+      "threshold": 0.05,
+      "risk_control": "30d volatility target 70%, no leverage above 1x",
+      "metrics": {
+        "2014-2018": {
+          "total_return": 0.172985,
+          "annual_return": 0.123005,
+          "sharpe": 0.4806,
+          "max_drawdown": -0.581381
+        },
+        "2019-2023": {
+          "total_return": 17.431563,
+          "annual_return": 0.790498,
+          "sharpe": 1.3323,
+          "max_drawdown": -0.5622
+        },
+        "2024-2026": {
+          "total_return": 1.014039,
+          "annual_return": 0.330896,
+          "sharpe": 0.9101,
+          "max_drawdown": -0.340246
+        }
+      },
+      "passes_20pct_all_windows": false,
+      "min_annual_return": 0.123005,
+      "max_drawdown": -0.581381
+    }
+  ]
+}
