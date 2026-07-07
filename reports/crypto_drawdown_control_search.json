@@ -1,6 +1,14 @@
 {
-  "generated_at": "2026-07-07T16:26:26",
+  "generated_at": "2026-07-07T16:30:02",
   "base_strategy": "BTC/ETH momentum rotation, Bitstamp daily CSV",
+  "recommendation": {
+    "profile": "return_enhanced",
+    "lookback_days": 20,
+    "threshold": 0.2,
+    "target_vol": 0.28,
+    "vol_window_days": 20,
+    "reason": "highest minimum annual return with max drawdown <= 25%"
+  },
   "top": [
     {
       "lookback_days": 120,

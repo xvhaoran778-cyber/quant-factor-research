@@ -60,6 +60,14 @@ def main() -> None:
             {
                 "generated_at": datetime.now().isoformat(timespec="seconds"),
                 "base_strategy": "BTC/ETH momentum rotation, Bitstamp daily CSV",
+                "recommendation": {
+                    "profile": "return_enhanced",
+                    "lookback_days": 20,
+                    "threshold": 0.20,
+                    "target_vol": 0.28,
+                    "vol_window_days": 20,
+                    "reason": "highest minimum annual return with max drawdown <= 25%",
+                },
                 "top": rows[:25],
                 "passing": [row for row in rows if row["passes_20pct_all_windows"]],
             },
