@@ -1,0 +1,630 @@
+{
+  "generated_at": "2026-07-07T11:27:21",
+  "objective": "maximize worst-window Sharpe plus average Sharpe, penalize drawdown",
+  "top": [
+    {
+      "weights": {
+        "low_volatility_20": 0.5,
+        "downside_volatility_20": 0.3,
+        "distance_to_high_20": 0.2,
+        "market_relative_strength_60": 0.0,
+        "dry_up_breakout_60": 0.0,
+        "money_flow_persistence_20": 0.0,
+        "short_reversal_5": 0.0,
+        "calm_pullback_20": 0.0
+      },
+      "score": 0.11401466666666665,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.018469,
+          "annual_return": -0.002712,
+          "volatility": 0.169038,
+          "sharpe": 0.0688,
+          "max_drawdown": -0.30728,
+          "max_drawdown_duration_weeks": 180,
+          "benchmark_total_return": -0.071095,
+          "excess_return": 0.052627,
+          "turnover": 210.4861,
+          "win_rate": 0.4525,
+          "closed_trades": 621,
+          "profit_loss_ratio": 1.201,
+          "yearly_returns": {
+            "2012": -0.129599,
+            "2013": 0.006172,
+            "2014": 0.033081,
+            "2015": 0.270315,
+            "2016": 0.012407,
+            "2017": 0.002748,
+            "2018": -0.120089
+          }
+        },
+        "2019-2023": {
+          "total_return": 0.193974,
+          "annual_return": 0.036962,
+          "volatility": 0.181957,
+          "sharpe": 0.2887,
+          "max_drawdown": -0.200668,
+          "max_drawdown_duration_weeks": 141,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.263727,
+          "turnover": 187.5192,
+          "win_rate": 0.4129,
+          "closed_trades": 402,
+          "profit_loss_ratio": 1.555,
+          "yearly_returns": {
+            "2019": 0.133182,
+            "2020": 0.119519,
+            "2021": -0.007955,
+            "2022": -0.127485,
+            "2023": 0.033778
+          }
+        },
+        "2024-2026": {
+          "total_return": 0.070336,
+          "annual_return": 0.028222,
+          "volatility": 0.167253,
+          "sharpe": 0.2472,
+          "max_drawdown": -0.190236,
+          "max_drawdown_duration_weeks": 88,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.251236,
+          "turnover": 93.8255,
+          "win_rate": 0.464,
+          "closed_trades": 222,
+          "profit_loss_ratio": 1.29,
+          "yearly_returns": {
+            "2024": 0.15054,
+            "2025": -0.024499,
+            "2026": -0.007647
+          }
+        }
+      }
+    },
+    {
+      "weights": {
+        "low_volatility_20": 0.6,
+        "downside_volatility_20": 0.0,
+        "distance_to_high_20": 0.4,
+        "market_relative_strength_60": 0.0,
+        "dry_up_breakout_60": 0.0,
+        "money_flow_persistence_20": 0.0,
+        "short_reversal_5": 0.0,
+        "calm_pullback_20": 0.0
+      },
+      "score": -0.26025466666666663,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.188697,
+          "annual_return": -0.03,
+          "volatility": 0.208824,
+          "sharpe": -0.0406,
+          "max_drawdown": -0.459376,
+          "max_drawdown_duration_weeks": 180,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.117601,
+          "turnover": 279.6345,
+          "win_rate": 0.449,
+          "closed_trades": 824,
+          "profit_loss_ratio": 1.156,
+          "yearly_returns": {
+            "2012": -0.189273,
+            "2013": 0.007737,
+            "2014": -0.042317,
+            "2015": 0.44275,
+            "2016": -0.081382,
+            "2017": -0.081862,
+            "2018": -0.119296
+          }
+        },
+        "2019-2023": {
+          "total_return": 0.118524,
+          "annual_return": 0.023196,
+          "volatility": 0.201971,
+          "sharpe": 0.2121,
+          "max_drawdown": -0.236756,
+          "max_drawdown_duration_weeks": 137,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.339176,
+          "turnover": 242.8423,
+          "win_rate": 0.428,
+          "closed_trades": 542,
+          "profit_loss_ratio": 1.398,
+          "yearly_returns": {
+            "2019": 0.087122,
+            "2020": 0.076993,
+            "2021": 0.036057,
+            "2022": -0.156703,
+            "2023": 0.029937
+          }
+        },
+        "2024-2026": {
+          "total_return": -0.050488,
+          "annual_return": -0.020989,
+          "volatility": 0.169571,
+          "sharpe": -0.0433,
+          "max_drawdown": -0.270873,
+          "max_drawdown_duration_weeks": 88,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.372059,
+          "turnover": 120.1263,
+          "win_rate": 0.413,
+          "closed_trades": 293,
+          "profit_loss_ratio": 1.393,
+          "yearly_returns": {
+            "2024": 0.137868,
+            "2025": -0.037765,
+            "2026": -0.097737
+          }
+        }
+      }
+    },
+    {
+      "weights": {
+        "low_volatility_20": 0.4,
+        "downside_volatility_20": 0.0,
+        "distance_to_high_20": 0.2,
+        "market_relative_strength_60": 0.0,
+        "dry_up_breakout_60": 0.0,
+        "money_flow_persistence_20": 0.0,
+        "short_reversal_5": 0.4,
+        "calm_pullback_20": 0.0
+      },
+      "score": -0.8742851666666667,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.212912,
+          "annual_return": -0.034272,
+          "volatility": 0.198704,
+          "sharpe": -0.0747,
+          "max_drawdown": -0.681813,
+          "max_drawdown_duration_weeks": 180,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.141817,
+          "turnover": 487.4469,
+          "win_rate": 0.497,
+          "closed_trades": 1153,
+          "profit_loss_ratio": 0.968,
+          "yearly_returns": {
+            "2012": -0.130394,
+            "2013": 0.04378,
+            "2014": 0.252702,
+            "2015": 0.625256,
+            "2016": -0.237528,
+            "2017": -0.20015,
+            "2018": -0.261881
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.156863,
+          "annual_return": -0.034328,
+          "volatility": 0.163551,
+          "sharpe": -0.1317,
+          "max_drawdown": -0.356219,
+          "max_drawdown_duration_weeks": 144,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.614564,
+          "turnover": 344.1698,
+          "win_rate": 0.4833,
+          "closed_trades": 836,
+          "profit_loss_ratio": 1.01,
+          "yearly_returns": {
+            "2019": 0.081982,
+            "2020": -0.02774,
+            "2021": -0.063802,
+            "2022": -0.085895,
+            "2023": -0.144445
+          }
+        },
+        "2024-2026": {
+          "total_return": -0.142737,
+          "annual_return": -0.061112,
+          "volatility": 0.164552,
+          "sharpe": -0.3026,
+          "max_drawdown": -0.184506,
+          "max_drawdown_duration_weeks": 110,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.464309,
+          "turnover": 163.1907,
+          "win_rate": 0.4599,
+          "closed_trades": 461,
+          "profit_loss_ratio": 1.041,
+          "yearly_returns": {
+            "2024": -0.048167,
+            "2025": 0.040899,
+            "2026": -0.080923
+          }
+        }
+      }
+    },
+    {
+      "weights": {
+        "low_volatility_20": 0.4,
+        "downside_volatility_20": 0.0,
+        "distance_to_high_20": 0.3,
+        "market_relative_strength_60": 0.0,
+        "dry_up_breakout_60": 0.3,
+        "money_flow_persistence_20": 0.0,
+        "short_reversal_5": 0.0,
+        "calm_pullback_20": 0.0
+      },
+      "score": -1.1502923333333333,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.355714,
+          "annual_return": -0.062026,
+          "volatility": 0.220515,
+          "sharpe": -0.1787,
+          "max_drawdown": -0.737062,
+          "max_drawdown_duration_weeks": 183,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.284618,
+          "turnover": 357.5194,
+          "win_rate": 0.4265,
+          "closed_trades": 837,
+          "profit_loss_ratio": 1.252,
+          "yearly_returns": {
+            "2012": 0.043282,
+            "2013": 0.016438,
+            "2014": 0.469995,
+            "2015": -0.14337,
+            "2016": -0.210547,
+            "2017": 0.110497,
+            "2018": -0.385355
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.415879,
+          "annual_return": -0.104228,
+          "volatility": 0.194754,
+          "sharpe": -0.466,
+          "max_drawdown": -0.650853,
+          "max_drawdown_duration_weeks": 169,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.87358,
+          "turnover": 200.0631,
+          "win_rate": 0.4044,
+          "closed_trades": 591,
+          "profit_loss_ratio": 1.247,
+          "yearly_returns": {
+            "2019": 0.109994,
+            "2020": -0.140808,
+            "2021": -0.186465,
+            "2022": -0.373383,
+            "2023": 0.179138
+          }
+        },
+        "2024-2026": {
+          "total_return": -0.037088,
+          "annual_return": -0.015355,
+          "volatility": 0.188802,
+          "sharpe": 0.0101,
+          "max_drawdown": -0.287478,
+          "max_drawdown_duration_weeks": 88,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.35866,
+          "turnover": 119.7563,
+          "win_rate": 0.4031,
+          "closed_trades": 320,
+          "profit_loss_ratio": 1.422,
+          "yearly_returns": {
+            "2024": 0.010106,
+            "2025": 0.009804,
+            "2026": -0.030731
+          }
+        }
+      }
+    },
+    {
+      "weights": {
+        "low_volatility_20": 0.3,
+        "downside_volatility_20": 0.0,
+        "distance_to_high_20": 0.0,
+        "market_relative_strength_60": 0.4,
+        "dry_up_breakout_60": 0.3,
+        "money_flow_persistence_20": 0.0,
+        "short_reversal_5": 0.0,
+        "calm_pullback_20": 0.0
+      },
+      "score": -1.8274358333333331,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.848565,
+          "annual_return": -0.240386,
+          "volatility": 0.250126,
+          "sharpe": -0.9686,
+          "max_drawdown": -0.853833,
+          "max_drawdown_duration_weeks": 353,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.77747,
+          "turnover": 135.3912,
+          "win_rate": 0.4295,
+          "closed_trades": 745,
+          "profit_loss_ratio": 0.907,
+          "yearly_returns": {
+            "2012": -0.134209,
+            "2013": -0.351714,
+            "2014": 0.162194,
+            "2015": -0.315757,
+            "2016": -0.35866,
+            "2017": -0.111483,
+            "2018": -0.360414
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.578118,
+          "annual_return": -0.161955,
+          "volatility": 0.212939,
+          "sharpe": -0.7201,
+          "max_drawdown": -0.667855,
+          "max_drawdown_duration_weeks": 241,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -1.035818,
+          "turnover": 160.3461,
+          "win_rate": 0.4076,
+          "closed_trades": 525,
+          "profit_loss_ratio": 1.167,
+          "yearly_returns": {
+            "2019": 0.167781,
+            "2020": -0.254858,
+            "2021": -0.137352,
+            "2022": -0.398219,
+            "2023": -0.086896
+          }
+        },
+        "2024-2026": {
+          "total_return": 1.019627,
+          "annual_return": 0.3335,
+          "volatility": 0.298175,
+          "sharpe": 1.1141,
+          "max_drawdown": -0.296474,
+          "max_drawdown_duration_weeks": 39,
+          "benchmark_total_return": 0.321572,
+          "excess_return": 0.698056,
+          "turnover": 130.7493,
+          "win_rate": 0.4966,
+          "closed_trades": 296,
+          "profit_loss_ratio": 1.535,
+          "yearly_returns": {
+            "2024": 0.031406,
+            "2025": 0.379364,
+            "2026": 0.589945
+          }
+        }
+      }
+    },
+    {
+      "weights": {
+        "low_volatility_20": 0.4,
+        "downside_volatility_20": 0.0,
+        "distance_to_high_20": 0.0,
+        "market_relative_strength_60": 0.0,
+        "dry_up_breakout_60": 0.0,
+        "money_flow_persistence_20": 0.2,
+        "short_reversal_5": 0.0,
+        "calm_pullback_20": 0.4
+      },
+      "score": -1.9897481666666665,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.705595,
+          "annual_return": -0.16315,
+          "volatility": 0.223832,
+          "sharpe": -0.6805,
+          "max_drawdown": -0.818251,
+          "max_drawdown_duration_weeks": 180,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.634499,
+          "turnover": 231.2929,
+          "win_rate": 0.4948,
+          "closed_trades": 762,
+          "profit_loss_ratio": 0.795,
+          "yearly_returns": {
+            "2012": -0.150286,
+            "2013": 0.058221,
+            "2014": 0.006927,
+            "2015": 0.160879,
+            "2016": -0.392013,
+            "2017": -0.042866,
+            "2018": -0.482237
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.208205,
+          "annual_return": -0.046669,
+          "volatility": 0.181501,
+          "sharpe": -0.1727,
+          "max_drawdown": -0.397763,
+          "max_drawdown_duration_weeks": 241,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -0.665906,
+          "turnover": 218.3334,
+          "win_rate": 0.472,
+          "closed_trades": 572,
+          "profit_loss_ratio": 1.02,
+          "yearly_returns": {
+            "2019": 0.094256,
+            "2020": -0.088931,
+            "2021": -0.120581,
+            "2022": -0.19067,
+            "2023": -0.033169
+          }
+        },
+        "2024-2026": {
+          "total_return": -0.36701,
+          "annual_return": -0.170756,
+          "volatility": 0.198025,
+          "sharpe": -0.8441,
+          "max_drawdown": -0.402901,
+          "max_drawdown_duration_weeks": 88,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.688582,
+          "turnover": 96.5039,
+          "win_rate": 0.4783,
+          "closed_trades": 299,
+          "profit_loss_ratio": 0.733,
+          "yearly_returns": {
+            "2024": -0.067902,
+            "2025": -0.084586,
+            "2026": -0.178479
+          }
+        }
+      }
+    },
+    {
+      "weights": {
+        "low_volatility_20": 0.0,
+        "downside_volatility_20": 0.4,
+        "distance_to_high_20": 0.3,
+        "market_relative_strength_60": 0.0,
+        "dry_up_breakout_60": 0.0,
+        "money_flow_persistence_20": 0.3,
+        "short_reversal_5": 0.0,
+        "calm_pullback_20": 0.0
+      },
+      "score": -2.8427943333333334,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.902127,
+          "annual_return": -0.287177,
+          "volatility": 0.244221,
+          "sharpe": -1.2554,
+          "max_drawdown": -0.916168,
+          "max_drawdown_duration_weeks": 347,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.831031,
+          "turnover": 129.3476,
+          "win_rate": 0.3918,
+          "closed_trades": 929,
+          "profit_loss_ratio": 0.984,
+          "yearly_returns": {
+            "2012": -0.344082,
+            "2013": -0.247478,
+            "2014": -0.213972,
+            "2015": -0.359503,
+            "2016": -0.314343,
+            "2017": -0.155502,
+            "2018": -0.295953
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.793624,
+          "annual_return": -0.276074,
+          "volatility": 0.281954,
+          "sharpe": -0.9995,
+          "max_drawdown": -0.822302,
+          "max_drawdown_duration_weeks": 246,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -1.251324,
+          "turnover": 120.5383,
+          "win_rate": 0.3741,
+          "closed_trades": 695,
+          "profit_loss_ratio": 1.111,
+          "yearly_returns": {
+            "2019": -0.341375,
+            "2020": -0.363239,
+            "2021": 0.068987,
+            "2022": -0.454463,
+            "2023": -0.252156
+          }
+        },
+        "2024-2026": {
+          "total_return": -0.232143,
+          "annual_return": -0.102513,
+          "volatility": 0.26765,
+          "sharpe": -0.2715,
+          "max_drawdown": -0.427595,
+          "max_drawdown_duration_weeks": 83,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.553714,
+          "turnover": 116.3745,
+          "win_rate": 0.394,
+          "closed_trades": 368,
+          "profit_loss_ratio": 1.356,
+          "yearly_returns": {
+            "2024": -0.01141,
+            "2025": -0.171495,
+            "2026": -0.02421
+          }
+        }
+      }
+    },
+    {
+      "weights": {
+        "low_volatility_20": 0.4,
+        "downside_volatility_20": 0.0,
+        "distance_to_high_20": 0.3,
+        "market_relative_strength_60": 0.3,
+        "dry_up_breakout_60": 0.0,
+        "money_flow_persistence_20": 0.0,
+        "short_reversal_5": 0.0,
+        "calm_pullback_20": 0.0
+      },
+      "score": -2.902048,
+      "metrics": {
+        "2012-2018": {
+          "total_return": -0.876157,
+          "annual_return": -0.262318,
+          "volatility": 0.222772,
+          "sharpe": -1.2471,
+          "max_drawdown": -0.88766,
+          "max_drawdown_duration_weeks": 350,
+          "benchmark_total_return": -0.071095,
+          "excess_return": -0.805061,
+          "turnover": 118.9512,
+          "win_rate": 0.3843,
+          "closed_trades": 804,
+          "profit_loss_ratio": 1.003,
+          "yearly_returns": {
+            "2012": -0.246898,
+            "2013": -0.397484,
+            "2014": -0.058152,
+            "2015": -0.260471,
+            "2016": -0.393839,
+            "2017": 0.069356,
+            "2018": -0.35795
+          }
+        },
+        "2019-2023": {
+          "total_return": -0.703378,
+          "annual_return": -0.220265,
+          "volatility": 0.211072,
+          "sharpe": -1.0704,
+          "max_drawdown": -0.765184,
+          "max_drawdown_duration_weeks": 246,
+          "benchmark_total_return": 0.4577,
+          "excess_return": -1.161078,
+          "turnover": 121.4215,
+          "win_rate": 0.3691,
+          "closed_trades": 550,
+          "profit_loss_ratio": 1.141,
+          "yearly_returns": {
+            "2019": -0.12759,
+            "2020": -0.20165,
+            "2021": -0.38598,
+            "2022": -0.292889,
+            "2023": -0.021321
+          }
+        },
+        "2024-2026": {
+          "total_return": -0.334483,
+          "annual_return": -0.153567,
+          "volatility": 0.253893,
+          "sharpe": -0.5289,
+          "max_drawdown": -0.474555,
+          "max_drawdown_duration_weeks": 88,
+          "benchmark_total_return": 0.321572,
+          "excess_return": -0.656055,
+          "turnover": 97.4055,
+          "win_rate": 0.3667,
+          "closed_trades": 330,
+          "profit_loss_ratio": 1.328,
+          "yearly_returns": {
+            "2024": -0.050013,
+            "2025": -0.172402,
+            "2026": -0.006679
+          }
+        }
+      }
+    }
+  ]
+}

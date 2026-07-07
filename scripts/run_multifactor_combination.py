@@ -74,11 +74,11 @@ def weight_grid(step: int = 5) -> list[dict[str, float]]:
     return combos
 
 
-def factor_panel(store: ParquetMarketStore, start: date, end: date) -> pd.DataFrame:
+def factor_panel(store: ParquetMarketStore, start: date, end: date, factor_names: list[str] | None = None) -> pd.DataFrame:
     warmup = start - timedelta(days=365)
     daily = store.read(warmup, end, symbols=None, fill_suspensions=False)
     daily["date"] = pd.to_datetime(daily["date"])
-    daily = store.filter_point_in_time_universe(daily)
+    daily = store.filter_point_in_time_universe(daily).drop_duplicates(["date", "symbol"], keep="last")
     close = daily.pivot(index="date", columns="symbol", values="close")
     data = {
         "close": close,
@@ -89,19 +89,19 @@ def factor_panel(store: ParquetMarketStore, start: date, end: date) -> pd.DataFr
         "amount": daily.pivot(index="date", columns="symbol", values="amount"),
         "returns": close.pct_change(),
     }
-    factors = compute_factors_vectorized(data, FACTORS).reset_index()
+    factors = compute_factors_vectorized(data, factor_names or FACTORS).reset_index()
     factors["date"] = pd.to_datetime(factors["date"])
     return factors[factors["date"] >= pd.Timestamp(start)]
 
 
-def build_panel(store: ParquetMarketStore, start: date, end: date) -> pd.DataFrame:
+def build_panel(store: ParquetMarketStore, start: date, end: date, factor_names: list[str] | None = None) -> pd.DataFrame:
     panel = build_weekly_feature_panel(store, start, end, prefer_materialized=True)
-    return panel.merge(factor_panel(store, start, end), on=["date", "symbol"], how="left")
+    return panel.merge(factor_panel(store, start, end, factor_names), on=["date", "symbol"], how="left")
 
 
-def ranks(group: pd.DataFrame) -> dict[str, pd.Series]:
+def ranks(group: pd.DataFrame, factor_names: list[str] | None = None) -> dict[str, pd.Series]:
     out = {}
-    for name in FACTORS:
+    for name in factor_names or FACTORS:
         values = group[name].fillna(group[name].median())
         out[name] = values.rank(pct=True, ascending=DIRECTIONS[name] > 0, method="average").fillna(0.5)
     return out
@@ -141,8 +141,10 @@ def quick_screen(panel: pd.DataFrame, combos: list[dict[str, float]], top_n: int
 
 
 def backtest(panel: pd.DataFrame, weights: dict[str, float]) -> dict:
+    factor_names = [name for name, weight in weights.items() if weight]
+
     def scorer(group: pd.DataFrame) -> pd.Series:
-        return score_from_ranks(ranks(group), weights)
+        return score_from_ranks(ranks(group, factor_names), weights)
 
     result = run_scored_backtest(
         panel,

@@ -497,19 +497,18 @@ class ParquetMarketStore:
         timeline = pd.read_parquet(self.timeline_path)
         timeline["valid_from"] = pd.to_datetime(timeline["valid_from"], errors="coerce")
         timeline["valid_to"] = pd.to_datetime(timeline["valid_to"], errors="coerce")
-        eligible = timeline[timeline["is_listed"].astype(bool) & ~timeline["is_st"].astype(bool)]
-        dates = pd.to_datetime(frame[date_column], errors="coerce")
-        mask = pd.Series(False, index=frame.index)
-        for symbol, intervals in eligible.groupby("symbol", sort=False):
-            symbol_mask = frame["symbol"].astype(str).eq(str(symbol))
-            if not symbol_mask.any():
-                continue
-            symbol_dates = dates[symbol_mask]
-            covered = pd.Series(False, index=symbol_dates.index)
-            for row in intervals.itertuples(index=False):
-                covered |= symbol_dates.between(row.valid_from, row.valid_to, inclusive="both")
-            mask.loc[covered.index] = covered
-        return frame.loc[mask].copy()
+        eligible = timeline.loc[
+            timeline["is_listed"].astype(bool) & ~timeline["is_st"].astype(bool),
+            ["symbol", "valid_from", "valid_to"],
+        ]
+        keyed = frame.reset_index(drop=False).rename(columns={"index": "_row"})
+        keyed["_date"] = pd.to_datetime(keyed[date_column], errors="coerce")
+        keyed["symbol"] = keyed["symbol"].astype(str)
+        eligible["symbol"] = eligible["symbol"].astype(str)
+        matched = keyed.merge(eligible, on="symbol", how="inner")
+        matched = matched[matched["_date"].between(matched["valid_from"], matched["valid_to"], inclusive="both")]
+        rows = matched["_row"].drop_duplicates()
+        return frame.loc[rows].copy()
 
     def timeline_audit(self, start: date | None = None, end: date | None = None) -> dict:
         metadata = self.timeline_metadata()
